@@ -2,9 +2,9 @@ import React from 'react';
 
 function Header(props) {
   return (
-    <header className="header">
-      <h1>Sheynanigans Bakery &trade;</h1>
-      <img src="/images/favicon.png" alt="Logo"/>
+    <header className="header container-fluid">
+      <img className="p-2 m-2" src="/images/favicon.png" alt="Logo"/>
+      <h1 className="text-white d-inline-block">Wicked Sales</h1>
     </header>
   );
 }

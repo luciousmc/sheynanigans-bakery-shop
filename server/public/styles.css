@@ -1,4 +1,17 @@
+/* Bootstrp color overrides */
 :root {
-  --bg-primary: #A864FD;
-  
+  --purple  : #A864FD;
+  --cyan    : #29cdff;
+  --yellow  : #FDFF6A;
+  --green   : #78FF44;
+  --orange  : #FF718D;
+}
+
+.header {
+  background-color: var(--purple);
+}
+
+.card img {
+  height: 180px;
+  object-fit: contain;
 }
