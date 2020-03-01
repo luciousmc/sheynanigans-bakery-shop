@@ -50,8 +50,9 @@ app.get('/api/products/:productId', (req, res, next) => {
     .then(response => {
       const product = response.rows[0];
       if (!product) {
-        res.status(404).json({ error: 'Id does not exist', requestedId: productId });
-        return;
+        next(new ClientError('Id does not exit', 404));
+        // res.status(404).json({ error: 'Id does not exist', requestedId: productId });
+        // return;
       }
       res.json(response.rows[0]);
     })
