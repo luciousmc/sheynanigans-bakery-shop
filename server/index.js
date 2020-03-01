@@ -19,6 +19,7 @@ app.get('/api/health-check', (req, res, next) => {
     .catch(err => next(err));
 });
 
+// GET all products
 app.get('/api/products', (req, res, next) => {
   const sql = `
     SELECT  "productId", "name", "price",
@@ -27,6 +28,34 @@ app.get('/api/products', (req, res, next) => {
   db.query(sql)
     .then(response => res.json(response.rows))
     .catch(err => next(err));
+});
+
+// GET product details by ID
+app.get('/api/products/:productId', (req, res, next) => {
+  let { productId } = req.params;
+  productId = parseInt(productId);
+
+  if (isNaN(productId) || productId < 1) {
+    res.status(400).json({ error: 'Id must be a positive integer.', requestedId: productId });
+    return;
+  }
+
+  const sql = `
+    SELECT  *
+    FROM    "products"
+    WHERE   "productId" = $1`;
+  const values = [productId];
+
+  db.query(sql, values)
+    .then(response => {
+      const product = response.rows[0];
+      if (!product) {
+        res.status(404).json({ error: 'Id does not exist', requestedId: productId });
+        return;
+      }
+      res.json(response.rows[0]);
+    })
+    .catch(error => next(error));
 });
 
 app.use('/api', (req, res, next) => {
