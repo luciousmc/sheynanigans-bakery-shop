@@ -9,7 +9,11 @@ function ProductListItem(props) {
           <h5 className="card-title">{ props.product.name }</h5>
           <p className="card-text lead">{ '$' + (props.product.price / 100).toFixed(2) }</p>
           <p className="card-text">{ props.product.shortDescription }</p>
-          <a href="#" className="btn btn-primary">Purchase</a>
+          <a href="#"
+            className="btn btn-primary"
+            onClick={ () => props.setView('details', { productId: props.product.productId })}
+          >More Details
+          </a>
         </div>
       </div>
     </div>

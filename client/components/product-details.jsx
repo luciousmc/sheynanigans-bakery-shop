@@ -23,19 +23,20 @@ class ProductDetails extends React.Component {
       );
     } else {
       const { product } = this.state;
-
       return (
         <section className="container">
           <div className="row">
             <div className="col-12">
-              <a href="#">&lt; Return to Catalog</a>
+              <a href="#" onClick={ () => this.props.setView('catalog', {}) }>&lt; Return to Catalog</a>
             </div>
           </div>
           <div className="row">
-            <div className="col-7 product-detail-img"></div>
+            <div className="col-7 product-detail-img">
+              <img src={ product.image } alt=""/>
+            </div>
             <div className="col 5">
               <h3>{ product.name }</h3>
-              <p className="lead">{ product.price }</p>
+              <p className="lead">{ '$' + (product.price / 100).toFixed(2) }</p>
               <p>{ product.shortDescription }</p>
             </div>
           </div>

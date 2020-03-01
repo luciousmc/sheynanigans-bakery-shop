@@ -20,17 +20,21 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <React.Fragment>
-        <Header />
-        {
-          this.state.view.name === 'catalog'
-            ? <ProductList setView={ this.setView }/>
-            : <ProductDetails params={ this.state.view.params } />
-        }
-        <ProductList />
-      </React.Fragment>
-    );
+    if (this.state.view.name === 'catalog') {
+      return (
+        <React.Fragment>
+          <Header />
+          <ProductList setView={ this.setView } />
+        </React.Fragment>
+      );
+    } else {
+      return (
+        <React.Fragment>
+          <Header />
+          <ProductDetails params={ this.state.view.params } setView={ this.setView }/>
+        </React.Fragment>
+      );
+    }
   }
 }
 
