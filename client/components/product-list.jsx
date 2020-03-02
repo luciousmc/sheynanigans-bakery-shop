@@ -23,7 +23,7 @@ class ProductList extends React.Component {
 
   render() {
     return (
-      <section className="container">
+      <section className="container mt-4">
         <div className="row">
           {
             this.state.products.map(product => {
