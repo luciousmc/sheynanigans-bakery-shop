@@ -19,6 +19,35 @@ app.get('/api/health-check', (req, res, next) => {
     .catch(err => next(err));
 });
 
+// GET cart
+app.get('/api/cart', (req, res, next) => {
+  res.json([]);
+});
+
+// POST to the cart
+app.post('/api/cart', express.json(), (req, res, next) => {
+  if (!req.body) {
+    next(new ClientError('request body required', 400));
+  }
+
+  if (isNaN(req.body.productId) || req.body.productId < 1) {
+    next(new ClientError('productId must be a positive integer', 400));
+  }
+
+  const sql = `
+    SELECT  "price"
+    FROM    "products"
+    WHERE   "productId" = $1`;
+  const values = [req.body.productId];
+
+  db.query(sql, values)
+    .then(result => result.json())
+    .then(obj => {
+      // eslint-disable-next-line no-console
+      console.log('the object is: ', obj);
+    });
+});
+
 // GET all products
 app.get('/api/products', (req, res, next) => {
   const sql = `
