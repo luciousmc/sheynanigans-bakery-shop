@@ -33,19 +33,37 @@ app.post('/api/cart', express.json(), (req, res, next) => {
   if (isNaN(req.body.productId) || req.body.productId < 1) {
     next(new ClientError('productId must be a positive integer', 400));
   }
-
-  const sql = `
+  const sqlSelectPrice = `
     SELECT  "price"
     FROM    "products"
     WHERE   "productId" = $1`;
   const values = [req.body.productId];
 
-  db.query(sql, values)
-    .then(result => result.json())
-    .then(obj => {
+  db.query(sqlSelectPrice, values)
+    .then(result => {
+      if (!result.rows) {
+        next(new ClientError('Product not found', 404));
+      }
+      const { price } = result.rows[0];
+      const item = { price };
+      const sqlInsertRows = `
+        INSERT INTO "carts" ("cartId", "createdAt")
+        VALUES  (default, default) 
+        RETURNING "cartId"`;
+
+      return db.query(sqlInsertRows)
+        .then(response => {
+          const { cartId } = response.rows[0];
+          item.cartId = cartId;
+          return item;
+        });
+    })
+    .then(itemObj => {
       // eslint-disable-next-line no-console
-      console.log('the object is: ', obj);
-    });
+      console.log('the object passed in is: ', itemObj);
+    })
+    .then()
+    .catch(err => next(err));
 });
 
 // GET all products
