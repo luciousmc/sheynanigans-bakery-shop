@@ -71,9 +71,20 @@ app.post('/api/cart', express.json(), (req, res, next) => {
       return db.query(sqlInsertItem, values)
         .then(result => result.rows[0]);
     })
-    .then(itemId => {
-      // eslint-disable-next-line no-console
-      console.log('the next object is: ', itemId);
+    .then(cartItem => {
+      const { cartItemId } = cartItem;
+
+      const sqlGetProductInfo = `
+        SELECT  "c"."cartItemId", "c"."price",
+                "p"."productId", "p"."name",
+                "p"."image", "p"."shortDescription"
+        FROM    "cartItems" AS "c"
+        JOIN    "products" AS "p" USING ("productId")
+        WHERE   "c"."cartItemId" = $1`;
+      const values = [cartItemId];
+
+      db.query(sqlGetProductInfo, values)
+        .then(result => res.status(201).json(result.rows[0]));
     })
     .catch(err => next(err));
 });
