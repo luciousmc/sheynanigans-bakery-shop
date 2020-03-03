@@ -20,7 +20,7 @@ ALTER TABLE ONLY public.products DROP CONSTRAINT products_pkey;
 ALTER TABLE ONLY public.carts DROP CONSTRAINT carts_pkey;
 ALTER TABLE ONLY public."cartItems" DROP CONSTRAINT "cartItems_pkey";
 ALTER TABLE public.products ALTER COLUMN "productId" DROP DEFAULT;
-ALTER TABLE public.carts ALTER COLUMN "cardId" DROP DEFAULT;
+ALTER TABLE public.carts ALTER COLUMN "cartId" DROP DEFAULT;
 ALTER TABLE public."cartItems" ALTER COLUMN "cartItemId" DROP DEFAULT;
 DROP SEQUENCE public."products_productId_seq";
 DROP TABLE public.products;
@@ -99,7 +99,7 @@ ALTER SEQUENCE public."cartItems_cartItemId_seq" OWNED BY public."cartItems"."ca
 --
 
 CREATE TABLE public.carts (
-    "cardId" integer NOT NULL,
+    "cartId" integer NOT NULL,
     "createdAt" timestamp(6) with time zone DEFAULT now() NOT NULL
 );
 
@@ -121,7 +121,7 @@ CREATE SEQUENCE public."carts_cardId_seq"
 -- Name: carts_cardId_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE public."carts_cardId_seq" OWNED BY public.carts."cardId";
+ALTER SEQUENCE public."carts_cardId_seq" OWNED BY public.carts."cartId";
 
 
 --
@@ -166,10 +166,10 @@ ALTER TABLE ONLY public."cartItems" ALTER COLUMN "cartItemId" SET DEFAULT nextva
 
 
 --
--- Name: carts cardId; Type: DEFAULT; Schema: public; Owner: -
+-- Name: carts cartId; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.carts ALTER COLUMN "cardId" SET DEFAULT nextval('public."carts_cardId_seq"'::regclass);
+ALTER TABLE ONLY public.carts ALTER COLUMN "cartId" SET DEFAULT nextval('public."carts_cardId_seq"'::regclass);
 
 
 --
@@ -191,7 +191,7 @@ COPY public."cartItems" ("cartItemId", "cartId", "productId", price) FROM stdin;
 -- Data for Name: carts; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.carts ("cardId", "createdAt") FROM stdin;
+COPY public.carts ("cartId", "createdAt") FROM stdin;
 \.
 
 
@@ -243,7 +243,7 @@ ALTER TABLE ONLY public."cartItems"
 --
 
 ALTER TABLE ONLY public.carts
-    ADD CONSTRAINT carts_pkey PRIMARY KEY ("cardId");
+    ADD CONSTRAINT carts_pkey PRIMARY KEY ("cartId");
 
 
 --
