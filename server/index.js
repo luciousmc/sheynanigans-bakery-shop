@@ -21,7 +21,21 @@ app.get('/api/health-check', (req, res, next) => {
 
 // GET cart
 app.get('/api/cart', (req, res, next) => {
-  res.json([]);
+  if (!req.session.cartId) {
+    res.json([]);
+  }
+
+  const sql = `
+    SELECT  "c"."cartItemId", "c"."price",
+            "p"."productId", "p"."name",
+            "p"."image", "p"."shortDescription"
+    FROM    "cartItems" AS "c"
+    JOIN    "products" AS "p" USING ("productId")
+    WHERE   "c"."cartId" = $1`;
+  const values = [req.session.cartId];
+
+  db.query(sql, values)
+    .then(result => res.json(result.rows));
 });
 
 // POST to the cart
@@ -46,17 +60,22 @@ app.post('/api/cart', express.json(), (req, res, next) => {
       }
       const { price } = result.rows[0];
       const item = { price };
-      const sqlInsertRows = `
-        INSERT INTO "carts" ("cartId", "createdAt")
-        VALUES  (default, default) 
-        RETURNING "cartId"`;
 
-      return db.query(sqlInsertRows)
-        .then(response => {
-          const { cartId } = response.rows[0];
-          item.cartId = cartId;
-          return item;
-        });
+      if (!req.session.cartId) {
+        const sqlInsertRows = `
+          INSERT INTO "carts" ("cartId", "createdAt")
+          VALUES  (default, default) 
+          RETURNING "cartId"`;
+
+        return db.query(sqlInsertRows, values)
+          .then(response => {
+            const { cartId } = response.rows[0];
+            item.cartId = cartId;
+            return item;
+          });
+      }
+      item.cartId = req.session.cartId;
+      return item;
     })
     .then(itemObj => {
       const { cartId, price } = itemObj;
