@@ -59,10 +59,22 @@ app.post('/api/cart', express.json(), (req, res, next) => {
         });
     })
     .then(itemObj => {
-      // eslint-disable-next-line no-console
-      console.log('the object passed in is: ', itemObj);
+      const { cartId, price } = itemObj;
+      req.session.cartId = cartId;
+
+      const sqlInsertItem = `
+        INSERT INTO "cartItems" ("cartId", "productId", "price")
+        VALUES    ($1, $2, $3)
+        RETURNING "cartItemId"`;
+      const values = [cartId, req.body.productId, price];
+
+      return db.query(sqlInsertItem, values)
+        .then(result => result.rows[0]);
     })
-    .then()
+    .then(itemId => {
+      // eslint-disable-next-line no-console
+      console.log('the next object is: ', itemId);
+    })
     .catch(err => next(err));
 });
 
