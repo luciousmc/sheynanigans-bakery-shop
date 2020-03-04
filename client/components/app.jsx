@@ -3,6 +3,7 @@ import Header from './header';
 import ProductList from './product-list';
 import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
+import CheckoutForm from './checkout-form';
 
 class App extends Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class App extends Component {
     };
     this.setView = this.setView.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    this.placeOrder = this.placeOrder.bind(this);
   }
 
   componentDidMount() {
@@ -42,10 +44,29 @@ class App extends Component {
     fetch('/api/cart', fetchOptions)
       .then(response => response.json())
       .then(item => {
-        if (Object.prototype.hasOwnProperty.call(item, 'error')) {
-          return;
-        }
         this.setState({ cart: [...this.state.cart, item] });
+      })
+      .catch(error => console.error(error));
+  }
+
+  placeOrder(customer) {
+    const fetchOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(customer)
+    };
+
+    fetch('/api/orders', fetchOptions)
+      .then(() => {
+        this.setState({
+          view: {
+            name: 'catalog',
+            params: {}
+          },
+          cart: []
+        });
       });
   }
 
@@ -72,11 +93,18 @@ class App extends Component {
           />
         </React.Fragment>
       );
-    } else {
+    } else if (this.state.view.name === 'cart') {
       return (
         <React.Fragment>
           <Header cartItemAmt={ this.state.cart.length } setView={ this.setView } />
           <CartSummary list={ this.state.cart } setView={ this.setView } />
+        </React.Fragment>
+      );
+    } else {
+      return (
+        <React.Fragment>
+          <Header cartItemAmt={ this.state.cart.length } setView={ this.setView } />
+          <CheckoutForm setView={ this.setView } placeOrder={ this.placeOrder } total={ this.state.view.params.total }/>
         </React.Fragment>
       );
     }
