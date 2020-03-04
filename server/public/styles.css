@@ -10,6 +10,13 @@
 .header {
   background-color: var(--purple);
 }
+/* Header */
+.cart-count {
+  font-size: 1.4rem;
+}
+.cart-count span {
+  text-shadow: 1px 1px 5px black;
+}
 
 /* Catalog View */
 .card img {
