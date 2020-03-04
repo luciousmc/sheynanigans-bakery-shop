@@ -2,10 +2,10 @@ import React from 'react';
 import CartSummaryItem from './cart-summary-item';
 
 function CartSummary(props) {
-  let body;
+  let body, totalTxt;
   let total = 0;
 
-  if (props.list === []) {
+  if (props.list.length === 0) {
     body = <h3>There are no items in the cart</h3>;
   } else {
     body = (
@@ -13,6 +13,13 @@ function CartSummary(props) {
         total += item.price;
         return <CartSummaryItem cartItem={ item } key={ item.cartItemId } />;
       })
+    );
+    totalTxt = (
+      <div className="row">
+        <div className="col">
+          <div className="h3 m-3">{ 'Total Cost: $' + (total / 100).toFixed(2) }</div>
+        </div>
+      </div>
     );
   }
   return (
@@ -31,11 +38,7 @@ function CartSummary(props) {
         </div>
       </div>
       { body }
-      <div className="row">
-        <div className="col">
-          <div className="h3 m-3">{ 'Total Cost: $' + (total / 100).toFixed(2) }</div>
-        </div>
-      </div>
+      { totalTxt }
     </section>
   );
 }
