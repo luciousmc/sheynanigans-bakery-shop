@@ -9,7 +9,7 @@ class App extends Component {
     super(props);
     this.state = {
       view: {
-        name: 'cart',
+        name: 'catalog',
         params: {}
       },
       cart: []
