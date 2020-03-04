@@ -109,6 +109,33 @@ app.post('/api/cart', (req, res, next) => {
     .catch(err => next(err));
 });
 
+// Place an order
+app.post('/api/orders', (req, res, next) => {
+  if (!req.session.cartId) {
+    next(new ClientError('Missing cart', 400));
+  }
+  if (!req.body) {
+    next(new ClientError('No body present in REQUEST', 400));
+  }
+  const custInfo = req.body;
+  if (!custInfo.name || !custInfo.creditCard || !custInfo.shippingAddress) {
+    next(new ClientError('"name", "address" and "creditCard" are required fields for placing orders'));
+  }
+
+  const sqlInsertOrder = `
+    INSERT INTO "orders" ("cartId", "name", "creditCard", "shippingAddress")
+    VALUES ($1, $2, $3, $4)
+    RETURNING "orderId", "name", "creditCard", "shippingAddress", "createdAt"`;
+  const values = [req.session.cartId, custInfo.name, custInfo.creditCard, custInfo.shippingAddress];
+
+  db.query(sqlInsertOrder, values)
+    .then(result => {
+      delete req.session.cartId;
+      res.status(201).json(result.rows[0]);
+    })
+    .catch(err => next(err));
+});
+
 // GET all products
 app.get('/api/products', (req, res, next) => {
   const sql = `
