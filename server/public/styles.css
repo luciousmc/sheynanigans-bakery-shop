@@ -11,7 +11,18 @@
   background-color: var(--purple);
 }
 
+/* Catalog View */
 .card img {
   height: 180px;
+  object-fit: contain;
+}
+
+/* View details  */
+.product-detail-img {
+  text-align: center;
+}
+.product-detail-img img {
+  max-width: 80%;
+  height: 350px;
   object-fit: contain;
 }

@@ -24,13 +24,13 @@ class ProductDetails extends React.Component {
     } else {
       const { product } = this.state;
       return (
-        <section className="container">
+        <section className="container mb-3 w-75 border border-secondary rounded">
           <div className="row">
-            <div className="col-12">
+            <div className="col-12 p-3">
               <a href="#" onClick={ () => this.props.setView('catalog', {}) }>&lt; Return to Catalog</a>
             </div>
           </div>
-          <div className="row">
+          <div className="row mb-5">
             <div className="col-7 product-detail-img">
               <img src={ product.image } alt=""/>
             </div>
@@ -42,7 +42,7 @@ class ProductDetails extends React.Component {
           </div>
           <div className="row">
             <div className="col-12">
-              <p>{ product.longDescription }</p>
+              <p className="p-3">{ product.longDescription }</p>
             </div>
           </div>
         </section>
