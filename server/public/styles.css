@@ -7,13 +7,19 @@
   --orange  : #FF718D;
 }
 
+
+/* Header */
 .header {
   background-color: var(--purple);
 }
-/* Header */
+
 .cart-count {
   font-size: 1.4rem;
 }
+.cart-count:hover {
+  cursor: pointer;
+}
+
 .cart-count span {
   text-shadow: 1px 1px 5px black;
 }
@@ -35,4 +41,15 @@
 }
 .btn-add-to-cart {
   cursor: pointer;
+}
+
+/* Cart Summary View */
+.btn-back-to-catalog {
+  cursor: pointer;
+  font-size: 1.3rem;
+}
+.cart-item img {
+  max-width: 100%;
+  height: 150px;
+  object-fit: contain;
 }

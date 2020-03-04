@@ -19,7 +19,12 @@ function Header(props) {
           <h1 className="text-white text-center d-inline-block">Wicked Sales</h1>
         </div>
         <div className="col">
-          <p className="cart-count text-white text-right p-2">{ cartText } <span className="icon"><i className="fas fa-shopping-cart"></i></span></p>
+          <p
+            onClick={ () => props.setView('cart', {}) }
+            className="cart-count text-white text-right p-2">
+            { cartText }
+            <span className="icon"><i className="fas fa-shopping-cart"></i></span>
+          </p>
         </div>
       </div>
     </header>
