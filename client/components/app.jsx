@@ -30,8 +30,6 @@ class App extends Component {
   }
 
   addToCart(product) {
-    // eslint-disable-next-line no-console
-    console.log('the product is: ', product);
     const fetchOptions = {
       method: 'POST',
       headers: {

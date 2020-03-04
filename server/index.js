@@ -43,13 +43,10 @@ app.get('/api/cart', (req, res, next) => {
 app.post('/api/cart', (req, res, next) => {
   if (!req.body) {
     next(new ClientError('request body required', 400));
-    return;
   }
-  // eslint-disable-next-line no-console
-  console.log('thebody is ', req.body);
+
   if (isNaN(req.body.productId) || req.body.productId < 1) {
     next(new ClientError('productId must be a positive integer', 400));
-    return;
   }
   const sqlSelectPrice = `
     SELECT  "price"
@@ -71,7 +68,7 @@ app.post('/api/cart', (req, res, next) => {
           VALUES  (default, default) 
           RETURNING "cartId"`;
 
-        return db.query(sqlInsertRows, values)
+        return db.query(sqlInsertRows)
           .then(response => {
             const { cartId } = response.rows[0];
             item.cartId = cartId;
