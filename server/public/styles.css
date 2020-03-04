@@ -33,3 +33,6 @@
   height: 350px;
   object-fit: contain;
 }
+.btn-add-to-cart {
+  cursor: pointer;
+}

@@ -14,6 +14,7 @@ class App extends Component {
       cart: []
     };
     this.setView = this.setView.bind(this);
+    this.addToCart = this.addToCart.bind(this);
   }
 
   componentDidMount() {
@@ -29,18 +30,22 @@ class App extends Component {
   }
 
   addToCart(product) {
+    // eslint-disable-next-line no-console
+    console.log('the product is: ', product);
     const fetchOptions = {
-      url: '/api/cart',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      data: product
+      body: JSON.stringify(product)
     };
 
-    fetch(fetchOptions)
+    fetch('/api/cart', fetchOptions)
       .then(response => response.json())
       .then(item => {
+        if (Object.prototype.hasOwnProperty.call(item, 'error')) {
+          return;
+        }
         this.setState({ cart: [...this.state.cart, item] });
       });
   }
@@ -61,7 +66,11 @@ class App extends Component {
       return (
         <React.Fragment>
           <Header cartItemAmt={ this.state.cart.length } />
-          <ProductDetails params={ this.state.view.params } setView={ this.setView }/>
+          <ProductDetails
+            params={ this.state.view.params }
+            setView={ this.setView }
+            addToCart={ this.addToCart }
+          />
         </React.Fragment>
       );
     }

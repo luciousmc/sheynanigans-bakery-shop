@@ -23,6 +23,7 @@ app.get('/api/health-check', (req, res, next) => {
 app.get('/api/cart', (req, res, next) => {
   if (!req.session.cartId) {
     res.json([]);
+    return;
   }
 
   const sql = `
@@ -39,13 +40,16 @@ app.get('/api/cart', (req, res, next) => {
 });
 
 // POST to the cart
-app.post('/api/cart', express.json(), (req, res, next) => {
+app.post('/api/cart', (req, res, next) => {
   if (!req.body) {
     next(new ClientError('request body required', 400));
+    return;
   }
-
+  // eslint-disable-next-line no-console
+  console.log('thebody is ', req.body);
   if (isNaN(req.body.productId) || req.body.productId < 1) {
     next(new ClientError('productId must be a positive integer', 400));
+    return;
   }
   const sqlSelectPrice = `
     SELECT  "price"

@@ -38,6 +38,9 @@ class ProductDetails extends React.Component {
               <h3>{ product.name }</h3>
               <p className="lead">{ '$' + (product.price / 100).toFixed(2) }</p>
               <p>{ product.shortDescription }</p>
+              <div onClick={ () => this.props.addToCart(product) } className="btn btn-primary btn-add-to-cart">
+                Add to Cart
+              </div>
             </div>
           </div>
           <div className="row">
