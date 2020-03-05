@@ -19,9 +19,6 @@ function CartSummary(props) {
         <div className="col">
           <div className="h3 m-3">{ 'Total Cost: $' + (total / 100).toFixed(2) }</div>
         </div>
-        <div className="col">
-          <button className="btn btn-outline-dark" onClick={ () => props.setView('checkout', { total })}>Checkout</button>
-        </div>
       </div>
     );
   }
@@ -42,6 +39,9 @@ function CartSummary(props) {
       </div>
       { body }
       { totalTxt }
+      <div className="col text-right p-3">
+        <button className="btn btn-dark" onClick={ () => props.setView('checkout', { total })}>Checkout</button>
+      </div>
     </section>
   );
 }
