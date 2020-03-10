@@ -75,39 +75,70 @@ class App extends Component {
   }
 
   render() {
+    let renderComp;
+
     if (this.state.view.name === 'catalog') {
-      return (
-        <React.Fragment>
-          <Header cartItemAmt={ this.state.cart.length } setView={ this.setView } />
-          <ProductList setView={ this.setView } />
-        </React.Fragment>
-      );
+      renderComp = <ProductList setView={ this.setView } />;
     } else if (this.state.view.name === 'details') {
-      return (
-        <React.Fragment>
-          <Header cartItemAmt={ this.state.cart.length } setView={ this.setView } />
-          <ProductDetails
-            params={ this.state.view.params }
-            setView={ this.setView }
-            addToCart={ this.addToCart }
-          />
-        </React.Fragment>
-      );
+      renderComp = (
+        <ProductDetails
+          params={ this.state.view.params }
+          setView={ this.setView }
+          addToCart={ this.addToCart }
+        />);
     } else if (this.state.view.name === 'cart') {
-      return (
-        <React.Fragment>
-          <Header cartItemAmt={ this.state.cart.length } setView={ this.setView } />
-          <CartSummary list={ this.state.cart } setView={ this.setView } />
-        </React.Fragment>
-      );
+      renderComp = <CartSummary list={ this.state.cart } setView={ this.setView } />;
     } else {
-      return (
-        <React.Fragment>
-          <Header cartItemAmt={ this.state.cart.length } setView={ this.setView } />
-          <CheckoutForm setView={ this.setView } placeOrder={ this.placeOrder } total={ this.state.view.params.total }/>
-        </React.Fragment>
+      renderComp = (
+        <CheckoutForm
+          setView={ this.setView }
+          placeOrder={ this.placeOrder }
+          total={ this.state.view.params.total }
+        />
       );
     }
+
+    return (
+      <React.Fragment>
+        <Header cartItemAmt={ this.state.cart.length } setView={ this.setView } />
+        { renderComp }
+      </React.Fragment>
+    );
+
+    /// ///////
+    // if (this.state.view.name === 'catalog') {
+    //   return (
+    //     <React.Fragment>
+    //       <Header cartItemAmt={ this.state.cart.length } setView={ this.setView } />
+    //       <ProductList setView={ this.setView } />
+    //     </React.Fragment>
+    //   );
+    // } else if (this.state.view.name === 'details') {
+    //   return (
+    //     <React.Fragment>
+    //       <Header cartItemAmt={ this.state.cart.length } setView={ this.setView } />
+    //       <ProductDetails
+    //         params={ this.state.view.params }
+    //         setView={ this.setView }
+    //         addToCart={ this.addToCart }
+    //       />
+    //     </React.Fragment>
+    //   );
+    // } else if (this.state.view.name === 'cart') {
+    //   return (
+    //     <React.Fragment>
+    //       <Header cartItemAmt={ this.state.cart.length } setView={ this.setView } />
+    //       <CartSummary list={ this.state.cart } setView={ this.setView } />
+    //     </React.Fragment>
+    //   );
+    // } else {
+    //   return (
+    //     <React.Fragment>
+    //       <Header cartItemAmt={ this.state.cart.length } setView={ this.setView } />
+    //       <CheckoutForm setView={ this.setView } placeOrder={ this.placeOrder } total={ this.state.view.params.total }/>
+    //     </React.Fragment>
+    //   );
+    // }
   }
 }
 

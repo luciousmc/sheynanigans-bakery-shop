@@ -13,15 +13,15 @@ function Header(props) {
     <header className="header container-fluid mb-5">
       <div className="row">
         <div className="col">
-          <img className="p-2 m-2" src="/images/favicon.png" alt="Logo"/>
+          {/* <img className="p-2 m-2" src="/images/favicon.png" alt="Logo"/> */}
         </div>
         <div className="col">
-          <h1 className="text-white text-center d-inline-block">Wicked Sales</h1>
+          <h1 className="text-white text-center d-inline-block p-3">Wicked Sales</h1>
         </div>
         <div className="col">
           <p
             onClick={ () => props.setView('cart', {}) }
-            className="cart-count text-white text-right p-2">
+            className="cart-count text-white text-right p-3">
             { cartText }
             <span className="icon"><i className="fas fa-shopping-cart"></i></span>
           </p>
