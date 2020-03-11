@@ -5,12 +5,29 @@
   --yellow  : #FDFF6A;
   --green   : #78FF44;
   --orange  : #FF718D;
+  --turqoise: 
 }
 
 
 /* Header */
 .header {
-  background-color: var(--purple);
+  position: relative;
+  /* background-color: cadetblue; */
+}
+
+.header::after {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  background-color: cadetblue;
+  z-index: -1;
+}
+
+.header img {
+  max-width: 50%;
 }
 
 .cart-count {

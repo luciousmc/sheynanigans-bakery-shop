@@ -97,48 +97,12 @@ class App extends Component {
         />
       );
     }
-
     return (
       <React.Fragment>
         <Header cartItemAmt={ this.state.cart.length } setView={ this.setView } />
         { renderComp }
       </React.Fragment>
     );
-
-    /// ///////
-    // if (this.state.view.name === 'catalog') {
-    //   return (
-    //     <React.Fragment>
-    //       <Header cartItemAmt={ this.state.cart.length } setView={ this.setView } />
-    //       <ProductList setView={ this.setView } />
-    //     </React.Fragment>
-    //   );
-    // } else if (this.state.view.name === 'details') {
-    //   return (
-    //     <React.Fragment>
-    //       <Header cartItemAmt={ this.state.cart.length } setView={ this.setView } />
-    //       <ProductDetails
-    //         params={ this.state.view.params }
-    //         setView={ this.setView }
-    //         addToCart={ this.addToCart }
-    //       />
-    //     </React.Fragment>
-    //   );
-    // } else if (this.state.view.name === 'cart') {
-    //   return (
-    //     <React.Fragment>
-    //       <Header cartItemAmt={ this.state.cart.length } setView={ this.setView } />
-    //       <CartSummary list={ this.state.cart } setView={ this.setView } />
-    //     </React.Fragment>
-    //   );
-    // } else {
-    //   return (
-    //     <React.Fragment>
-    //       <Header cartItemAmt={ this.state.cart.length } setView={ this.setView } />
-    //       <CheckoutForm setView={ this.setView } placeOrder={ this.placeOrder } total={ this.state.view.params.total }/>
-    //     </React.Fragment>
-    //   );
-    // }
   }
 }
 
