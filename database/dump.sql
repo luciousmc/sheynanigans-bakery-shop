@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 10.10 (Ubuntu 10.10-0ubuntu0.18.04.1)
--- Dumped by pg_dump version 10.10 (Ubuntu 10.10-0ubuntu0.18.04.1)
+-- Dumped from database version 10.12 (Ubuntu 10.12-0ubuntu0.18.04.1)
+-- Dumped by pg_dump version 10.12 (Ubuntu 10.12-0ubuntu0.18.04.1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -17,17 +17,13 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 ALTER TABLE ONLY public.products DROP CONSTRAINT products_pkey;
-ALTER TABLE ONLY public.orders DROP CONSTRAINT orders_pkey;
 ALTER TABLE ONLY public.carts DROP CONSTRAINT carts_pkey;
 ALTER TABLE ONLY public."cartItems" DROP CONSTRAINT "cartItems_pkey";
 ALTER TABLE public.products ALTER COLUMN "productId" DROP DEFAULT;
-ALTER TABLE public.orders ALTER COLUMN "orderId" DROP DEFAULT;
 ALTER TABLE public.carts ALTER COLUMN "cartId" DROP DEFAULT;
 ALTER TABLE public."cartItems" ALTER COLUMN "cartItemId" DROP DEFAULT;
 DROP SEQUENCE public."products_productId_seq";
 DROP TABLE public.products;
-DROP SEQUENCE public."orders_orderId_seq";
-DROP TABLE public.orders;
 DROP SEQUENCE public."carts_cardId_seq";
 DROP TABLE public.carts;
 DROP SEQUENCE public."cartItems_cartItemId_seq";
@@ -129,40 +125,6 @@ ALTER SEQUENCE public."carts_cardId_seq" OWNED BY public.carts."cartId";
 
 
 --
--- Name: orders; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.orders (
-    "orderId" integer NOT NULL,
-    "cartId" integer NOT NULL,
-    name text NOT NULL,
-    "creditCard" text NOT NULL,
-    "shippingAddress" text NOT NULL,
-    "createdAt" timestamp(6) with time zone DEFAULT now() NOT NULL
-);
-
-
---
--- Name: orders_orderId_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public."orders_orderId_seq"
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: orders_orderId_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public."orders_orderId_seq" OWNED BY public.orders."orderId";
-
-
---
 -- Name: products; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -211,13 +173,6 @@ ALTER TABLE ONLY public.carts ALTER COLUMN "cartId" SET DEFAULT nextval('public.
 
 
 --
--- Name: orders orderId; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.orders ALTER COLUMN "orderId" SET DEFAULT nextval('public."orders_orderId_seq"'::regclass);
-
-
---
 -- Name: products productId; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -229,7 +184,17 @@ ALTER TABLE ONLY public.products ALTER COLUMN "productId" SET DEFAULT nextval('p
 --
 
 COPY public."cartItems" ("cartItemId", "cartId", "productId", price) FROM stdin;
-1	12	2	2595
+1	1	2	2595
+2	2	4	999
+3	3	1	2999
+4	3	2	2595
+5	3	1	2999
+6	4	2	2595
+7	4	2	2595
+8	4	5	9900
+9	5	2	2595
+10	5	2	2595
+11	5	3	2900
 \.
 
 
@@ -238,26 +203,11 @@ COPY public."cartItems" ("cartItemId", "cartId", "productId", price) FROM stdin;
 --
 
 COPY public.carts ("cartId", "createdAt") FROM stdin;
-1	2020-03-02 12:02:07.16811-08
-2	2020-03-02 12:05:31.733449-08
-3	2020-03-02 12:07:15.869845-08
-4	2020-03-02 12:09:22.725357-08
-5	2020-03-02 12:11:37.142668-08
-6	2020-03-02 12:17:36.660054-08
-7	2020-03-02 12:20:43.595615-08
-8	2020-03-02 12:24:29.929968-08
-9	2020-03-02 12:27:01.475705-08
-10	2020-03-02 12:32:28.9468-08
-11	2020-03-02 15:15:10.788477-08
-12	2020-03-04 08:05:06.091575-08
-\.
-
-
---
--- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: -
---
-
-COPY public.orders ("orderId", "cartId", name, "creditCard", "shippingAddress", "createdAt") FROM stdin;
+1	2020-03-02 23:15:58.033477-08
+2	2020-03-02 23:55:42.112966-08
+3	2020-03-03 00:11:33.364127-08
+4	2020-03-03 22:10:05.970078-08
+5	2020-03-05 16:34:16.803138-08
 \.
 
 
@@ -266,12 +216,12 @@ COPY public.orders ("orderId", "cartId", name, "creditCard", "shippingAddress", 
 --
 
 COPY public.products ("productId", name, price, image, "shortDescription", "longDescription") FROM stdin;
-1	Shake Weight	2999	/images/shake-weight.jpg	Dynamic Inertia technology ignites muscles in arms, shoulders, and chest.	Lorem ipsum dolor amet fashion axe pour-over jianbing, adaptogen waistcoat tacos master cleanse pitchfork next level. Thundercats pour-over chartreuse 90's. Master cleanse hot chicken ennui offal. Freegan slow-carb offal hell of. Umami polaroid wolf slow-carb next level. Gentrify cardigan seitan, kombucha tacos chambray roof party typewriter man braid. Tote bag lo-fi hell of chia fam hammock\\n.Aesthetic photo booth la croix, vaporware leggings biodiesel man braid tumeric skateboard tousled slow-carb four dollar toast synth pabst pickled. Typewriter church-key chia slow-carb vice gochujang actually. Shoreditch austin woke hot chicken, single-origin coffee ugh affogato four loko green juice. Migas iPhone four dollar toast mustache.
-2	ShamWow	2595	/images/shamwow.jpg	It's like a chamois, towel, and sponge, all in one! Soaks up to 10x it's weight in any liquid!	Lorem ipsum dolor amet fashion axe pour-over jianbing, adaptogen waistcoat tacos master cleanse pitchfork next level. Thundercats pour-over chartreuse 90's. Master cleanse hot chicken ennui offal. Freegan slow-carb offal hell of. Umami polaroid wolf slow-carb next level. Gentrify cardigan seitan, kombucha tacos chambray roof party typewriter man braid. Tote bag lo-fi hell of chia fam hammock\\n.Aesthetic photo booth la croix, vaporware leggings biodiesel man braid tumeric skateboard tousled slow-carb four dollar toast synth pabst pickled. Typewriter church-key chia slow-carb vice gochujang actually. Shoreditch austin woke hot chicken, single-origin coffee ugh affogato four loko green juice. Migas iPhone four dollar toast mustache.
-3	Snuggie	2900	/images/snuggie.jpg	Super-Soft Fleece with pockets! One Size fits all Adults! Keeps you Warm & Your Hands-Free!	Lorem ipsum dolor amet fashion axe pour-over jianbing, adaptogen waistcoat tacos master cleanse pitchfork next level. Thundercats pour-over chartreuse 90's. Master cleanse hot chicken ennui offal. Freegan slow-carb offal hell of. Umami polaroid wolf slow-carb next level. Gentrify cardigan seitan, kombucha tacos chambray roof party typewriter man braid. Tote bag lo-fi hell of chia fam hammock\\n.Aesthetic photo booth la croix, vaporware leggings biodiesel man braid tumeric skateboard tousled slow-carb four dollar toast synth pabst pickled. Typewriter church-key chia slow-carb vice gochujang actually. Shoreditch austin woke hot chicken, single-origin coffee ugh affogato four loko green juice. Migas iPhone four dollar toast mustache.
-4	Wax Vac	999	/images/wax-vac.jpg	Gentle way to remove ear wax. Safe and hygienic. Reduces the risk of painful infections.	Lorem ipsum dolor amet fashion axe pour-over jianbing, adaptogen waistcoat tacos master cleanse pitchfork next level. Thundercats pour-over chartreuse 90's. Master cleanse hot chicken ennui offal. Freegan slow-carb offal hell of. Umami polaroid wolf slow-carb next level. Gentrify cardigan seitan, kombucha tacos chambray roof party typewriter man braid. Tote bag lo-fi hell of chia fam hammock\\n.Aesthetic photo booth la croix, vaporware leggings biodiesel man braid tumeric skateboard tousled slow-carb four dollar toast synth pabst pickled. Typewriter church-key chia slow-carb vice gochujang actually. Shoreditch austin woke hot chicken, single-origin coffee ugh affogato four loko green juice. Migas iPhone four dollar toast mustache.
-5	Ostrich Pillow	9900	/images/ostrich-pillow.jpg	Create your own snugly space in the world and feel-good anywhere with the ultimate cocoon pillow.	Lorem ipsum dolor amet fashion axe pour-over jianbing, adaptogen waistcoat tacos master cleanse pitchfork next level. Thundercats pour-over chartreuse 90's. Master cleanse hot chicken ennui offal. Freegan slow-carb offal hell of. Umami polaroid wolf slow-carb next level. Gentrify cardigan seitan, kombucha tacos chambray roof party typewriter man braid. Tote bag lo-fi hell of chia fam hammock\\n.Aesthetic photo booth la croix, vaporware leggings biodiesel man braid tumeric skateboard tousled slow-carb four dollar toast synth pabst pickled. Typewriter church-key chia slow-carb vice gochujang actually. Shoreditch austin woke hot chicken, single-origin coffee ugh affogato four loko green juice. Migas iPhone four dollar toast mustache.
-6	Tater Mitts	830	/images/tater-mitts.jpg	8 Seconds is all you need with Tater Mitts. Quickly and easily prepare all your favorite potato dishes with Tater Mitts.	Lorem ipsum dolor amet fashion axe pour-over jianbing, adaptogen waistcoat tacos master cleanse pitchfork next level. Thundercats pour-over chartreuse 90's. Master cleanse hot chicken ennui offal. Freegan slow-carb offal hell of. Umami polaroid wolf slow-carb next level. Gentrify cardigan seitan, kombucha tacos chambray roof party typewriter man braid. Tote bag lo-fi hell of chia fam hammock\\n.Aesthetic photo booth la croix, vaporware leggings biodiesel man braid tumeric skateboard tousled slow-carb four dollar toast synth pabst pickled. Typewriter church-key chia slow-carb vice gochujang actually. Shoreditch austin woke hot chicken, single-origin coffee ugh affogato four loko green juice. Migas iPhone four dollar toast mustache.
+1	Chocolate Chip Cookies	1500	/images/bakery/cookies.jpg	Crunchy on the outside. Soft on the inside. Every bite will leave you in chocolate bliss	Made from only the highest quality ingredients. You will receive a dozen of our meticulously made chocolate chip cookies. Crunchy on the outside. Soft on the inside. Every bite will leave you in chocolate bliss.
+2	Chocolate Suprise Cookies	1899	/images/bakery/chocolate-suprise-cookies.jpg	Double the chocolate. Balanced with a sweet roasted marshmellow. Perfect to satisfy any sweet craving	Double chocolate cookie with semi-sweet chocolate chips and a roasted marshmellow nestled in the center. You'd think this little treat would be too much. Think again. A sprinkle of rock salt evens out this tasty treat.
+3	Multi-Flavored Macarons	1299	/images/bakery/macarons.jpg	A box of macarons! Choose from strawberry, blueberry, chocolate, matcha and oreo	Our own twist on the bite-sized treat. The box come with a mix of 12 macarons. Flavors are customizable
+4	Strawberry Cheesecake	2999	/images/bakery/strawberry-cheesecake.jpg	Made with homemade strawberry jam. Nothing says comfort like a creamy, fruity cheesecake.	Made with strawberries picked from our very own garden. This cheesecake is sure to leave you wanting more. Jam is marbled throug the cheesecake to ensure a nice fruity bite every time. Price is for a 12" pie. Custom messages can be added at your request.
+5	Magic Cinnamon Rolls	799	/images/bakery/magic-cinnamon-rolls.jpg	A twist on the classic cinnamon roll with a surprise inside	Powered with crushed oreo cookie crumbs then topped off with our secret glaze. The reamy filling will have you questioning the wizardry behind this treat.
+6	Ube Stuffed Croissants	1599	/images/bakery/ube-stuffed-croissants.jpg	Buttery-sweet goodness in every bite!	Golden crisped buttery croissants are filled with a healthy serving of Ube to bring a subtle sweet texture to the dessert. Ube is a type of purple yam that is common ingredient in asian desserts.
 \.
 
 
@@ -279,28 +229,21 @@ COPY public.products ("productId", name, price, image, "shortDescription", "long
 -- Name: cartItems_cartItemId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 1, true);
+SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 11, true);
 
 
 --
 -- Name: carts_cardId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."carts_cardId_seq"', 12, true);
-
-
---
--- Name: orders_orderId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('public."orders_orderId_seq"', 1, false);
+SELECT pg_catalog.setval('public."carts_cardId_seq"', 5, true);
 
 
 --
 -- Name: products_productId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."products_productId_seq"', 1, false);
+SELECT pg_catalog.setval('public."products_productId_seq"', 6, true);
 
 
 --
@@ -317,14 +260,6 @@ ALTER TABLE ONLY public."cartItems"
 
 ALTER TABLE ONLY public.carts
     ADD CONSTRAINT carts_pkey PRIMARY KEY ("cartId");
-
-
---
--- Name: orders orders_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.orders
-    ADD CONSTRAINT orders_pkey PRIMARY KEY ("orderId");
 
 
 --
