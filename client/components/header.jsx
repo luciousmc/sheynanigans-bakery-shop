@@ -10,11 +10,11 @@ function Header(props) {
     cartText = itemAmt + ' items';
   }
   return (
-    <header className="header container-fluid mb-5">
+    <header className="header container-fluid mb-2">
       <div className="row">
         <div className="col-4"></div>
         <div className="col-4 d-flex justify-content-center">
-          <img className="p-2 m-2" src="/images/logo.png" alt="Logo"/>
+          <img className="p-2 m-2" src="/images/logo.png" alt="Logo" onClick={ () => props.setView('catalog', {}) }/>
         </div>
         <div className="col-4">
           <p

@@ -2,7 +2,7 @@ import React from 'react';
 
 function CartSummaryItem(props) {
   return (
-    <div className="row cart-item border border-secondary rounded p-3 mb-2">
+    <div className="row cart-item border border-secondary rounded p-3 mb-2 w-75 mx-auto">
       <div className="col-3">
         <img className="cart-img" src={ props.cartItem.image } alt=""/>
       </div>

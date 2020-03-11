@@ -24,7 +24,7 @@ class ProductDetails extends React.Component {
     } else {
       const { product } = this.state;
       return (
-        <section className="container mb-3 w-75 border border-secondary rounded">
+        <section className="container mb-3 w-75 border border-secondary rounded detail-container">
           <div className="row">
             <div className="col-12 p-3">
               <a href="#" onClick={ () => this.props.setView('catalog', {}) }>&lt; Return to Catalog</a>
