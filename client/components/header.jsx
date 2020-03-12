@@ -21,7 +21,7 @@ function Header(props) {
             onClick={ () => props.setView('cart', {}) }
             className="cart-count text-white text-right p-3 ml-auto">
             { cartText }
-            <span className="icon"><i className="fas fa-shopping-cart"></i></span>
+            <span className="icon"><i className="fas fa-shopping-cart fa-2x"></i></span>
           </p>
         </div>
       </div>

@@ -23,7 +23,7 @@ function CartSummary(props) {
     );
   }
   return (
-    <section className="container w-80 border rounded cart-summary-container">
+    <section className="container w-80 rounded cart-summary-container">
       <div className="row">
         <div className="col-12">
           <div onClick={ () => props.setView('catalog', {}) } className="btn btn-back-to-catalog">
