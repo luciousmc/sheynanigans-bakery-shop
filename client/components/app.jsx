@@ -10,7 +10,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstVisit: true,
+      showModal: true,
       view: {
         name: 'catalog',
         params: {}
@@ -18,7 +18,7 @@ class App extends Component {
       cart: []
     };
     this.setView = this.setView.bind(this);
-    this.setVisit = this.setVisit.bind(this);
+    this.removeModal = this.removeModal.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.placeOrder = this.placeOrder.bind(this);
   }
@@ -35,8 +35,8 @@ class App extends Component {
       });
   }
 
-  setVisit() {
-    this.setState({ firstVisit: false });
+  removeModal() {
+    this.setState({ showModal: false });
   }
 
   addToCart(product) {
@@ -83,7 +83,7 @@ class App extends Component {
 
   render() {
     let renderView;
-    const overflow = this.state.firstVisit ? 'no-scroll' : 'scroll';
+    const overflow = this.state.showModal ? 'no-scroll' : 'scroll';
 
     if (this.state.view.name === 'catalog') {
       renderView = <ProductList setView={ this.setView } />;
@@ -107,8 +107,8 @@ class App extends Component {
     }
     return (
       <div className={ 'pb-5 ' + overflow }>
-        { this.state.firstVisit
-          ? <DisclaimerModal firstVisit={ this.state.firstVisit } setVisit={ this.setVisit } />
+        { this.state.showModal
+          ? <DisclaimerModal firstVisit={ this.state.showModal } removeModal={ this.removeModal } />
           : ''
         }
         <Header cartItemAmt={ this.state.cart.length } setView={ this.setView } />
