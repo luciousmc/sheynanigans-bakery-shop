@@ -28,7 +28,7 @@ class CheckoutForm extends React.Component {
   render() {
     const total = this.props.total;
     return (
-      <section className="container w-50">
+      <section className="container w-50 checkout-container">
         <div className="row">
           <div className="col-6">
             <h1>Checkout</h1>
@@ -37,6 +37,12 @@ class CheckoutForm extends React.Component {
             <p className="lead mb-0 text-right p-3">{ 'Total Cost: $' + (total / 100).toFixed(2) }</p>
           </div>
           <hr/>
+        </div>
+
+        <div className="row">
+          <div className="col">
+            <hr/>
+          </div>
         </div>
 
         <div className="row">
@@ -61,9 +67,9 @@ class CheckoutForm extends React.Component {
 
         <div className="row">
           <div className="col-12 p-3">
-            <div onClick={ () => this.props.setView('catalog', {}) } className="btn btn-back-to-catalog">
+            <a href="" onClick={ () => this.props.setView('catalog', {}) }>
               &lt; Continue Shopping
-            </div>
+            </a>
           </div>
         </div>
       </section>

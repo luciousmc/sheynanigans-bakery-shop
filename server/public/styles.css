@@ -122,9 +122,13 @@ span.close-btn {
   object-fit: cover;
 }
 
+/* Checkout */
+
+
+
 /* Global */
 
-.detail-container, .cart-summary-container, .card-item {
+.detail-container, .cart-summary-container, .card-item, .checkout-container {
   background-color: whitesmoke;
   border: 3px solid var(--orange);
   box-shadow: 1px 1px 10px gray;
