@@ -4,11 +4,13 @@ import ProductList from './product-list';
 import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
 import CheckoutForm from './checkout-form';
+import DisclaimerModal from './disclaimer';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      firstVisit: true,
       view: {
         name: 'catalog',
         params: {}
@@ -16,6 +18,7 @@ class App extends Component {
       cart: []
     };
     this.setView = this.setView.bind(this);
+    this.setVisit = this.setVisit.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.placeOrder = this.placeOrder.bind(this);
   }
@@ -30,6 +33,10 @@ class App extends Component {
       .then(cartItems => {
         this.setState({ cart: cartItems });
       });
+  }
+
+  setVisit() {
+    this.setState({ firstVisit: false });
   }
 
   addToCart(product) {
@@ -75,21 +82,22 @@ class App extends Component {
   }
 
   render() {
-    let renderComp;
+    let renderView;
+    const overflow = this.state.firstVisit ? 'no-scroll' : 'scroll';
 
     if (this.state.view.name === 'catalog') {
-      renderComp = <ProductList setView={ this.setView } />;
+      renderView = <ProductList setView={ this.setView } />;
     } else if (this.state.view.name === 'details') {
-      renderComp = (
+      renderView = (
         <ProductDetails
           params={ this.state.view.params }
           setView={ this.setView }
           addToCart={ this.addToCart }
         />);
     } else if (this.state.view.name === 'cart') {
-      renderComp = <CartSummary list={ this.state.cart } setView={ this.setView } />;
+      renderView = <CartSummary list={ this.state.cart } setView={ this.setView } />;
     } else {
-      renderComp = (
+      renderView = (
         <CheckoutForm
           setView={ this.setView }
           placeOrder={ this.placeOrder }
@@ -98,10 +106,14 @@ class App extends Component {
       );
     }
     return (
-      <React.Fragment>
+      <div className={ 'pb-5 ' + overflow }>
+        { this.state.firstVisit
+          ? <DisclaimerModal firstVisit={ this.state.firstVisit } setVisit={ this.setVisit } />
+          : ''
+        }
         <Header cartItemAmt={ this.state.cart.length } setView={ this.setView } />
-        { renderComp }
-      </React.Fragment>
+        { renderView }
+      </div>
     );
   }
 }

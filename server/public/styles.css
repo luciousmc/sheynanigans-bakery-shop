@@ -9,9 +9,9 @@
 }
 
 body {
-  /* background-color: var(--yellow); */
   position: relative;
   background-image: repeating-linear-gradient(to right, var(--yellow) 0, var(--yellow) 2%, var(--pink) 2% 4%);
+  height: 100%;
 }
 
 body::after {
@@ -24,6 +24,33 @@ body::after {
   background-color: rgba(255, 255, 255, .5);
   z-index: -2;
 }
+
+/* Modal */
+
+.modal-screen {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, .8);
+  z-index: 10;
+}
+
+.modal-screen .modal-box {
+  background-color: whitesmoke;
+  width: 50%;
+  border: 5px solid black;
+}
+
+span.close-btn {
+  font-size: 3rem;
+}
+
+.no-scroll {
+  height: 100vh;
+  padding: 0;
+  overflow: hidden;
+}
+
 /* Header */
 .header {
   position: relative;
