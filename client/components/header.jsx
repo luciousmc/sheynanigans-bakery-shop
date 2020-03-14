@@ -14,7 +14,7 @@ function Header(props) {
       <div className="row">
         <div className="col-4"></div>
         <div className="col-4 d-flex justify-content-center">
-          <img className="p-2 m-2" src="/images/logo.png" alt="Logo" onClick={ () => props.setView('catalog', {}) }/>
+          <img className="p-2 m-2" src="/images/bakery/logo_pink.png" alt="Logo" onClick={ () => props.setView('catalog', {}) }/>
         </div>
         <div className="col-4">
           <p

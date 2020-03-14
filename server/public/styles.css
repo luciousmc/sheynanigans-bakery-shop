@@ -7,7 +7,7 @@
   --cyan        : #29CDFF;
   --yellow      : rgb(253, 255, 134);
   --green       : #ADEEE2;
-  --pink        : #FF718D;
+  --pink        : #F82672;
   --pink-lt     : rgb(247, 162, 179);
   --orange      : #FF6045; 
 }
@@ -134,6 +134,6 @@ span.close-btn {
 
 .detail-container, .cart-summary-container, .card-item, .checkout-container {
   background-color: whitesmoke;
-  border: 3px solid var(--pink-lt);
+  border: 3px solid var(--pink);
   box-shadow: 1px 1px 10px gray;
 }
