@@ -17,6 +17,26 @@ class CheckoutForm extends React.Component {
     // this.handleCreditCardValChange = this.handleCreditCardValChange.bind(this);
   }
 
+  onBlur(e) {
+    const { value, name } = e.target;
+
+    switch (name) {
+      case 'name':
+        // Must have an input
+        if (!value) {
+          this.setState({ nameError: 'Name is required' });
+
+          // Name must be at least 5 characters
+        } else if (value.length < 5) {
+          this.setState({ nameError: 'Please enter at least 5 characters' });
+        }
+        break;
+      case 'shippingAddress':
+      case 'creditCard':
+    }
+    console.log('this just got blurred witH: ', e.target);
+  }
+
   handleChange(e) {
     const { value, name } = e.target;
 
@@ -57,6 +77,8 @@ class CheckoutForm extends React.Component {
                   id="name"
                   onChange={ this.handleChange }
                   value={ name }
+                  onBlur={ this.onBlur }
+                  maxLength="65"
                   required
                 />
               </div>
@@ -68,6 +90,7 @@ class CheckoutForm extends React.Component {
                   className="form-control"
                   id="address"
                   onChange={ this.handleChange }
+                  onBlur={ this.onBlur }
                   value={ shippingAddress }
                   required
                 />
@@ -80,6 +103,7 @@ class CheckoutForm extends React.Component {
                   className="form-control"
                   id="credit-card"
                   onChange={ this.handleChange }
+                  onBlur={ this.onBlur }
                   value={ creditCard }
                   required
                 />
