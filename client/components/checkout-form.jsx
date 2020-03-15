@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 
 class CheckoutForm extends React.Component {
@@ -5,28 +6,27 @@ class CheckoutForm extends React.Component {
     super(props);
     this.state = {
       name: '',
+      nameError: '',
       shippingAddress: '',
-      creditCard: ''
+      addressError: '',
+      creditCard: '',
+      creditCardError: ''
     };
-    this.handleNameValChange = this.handleNameValChange.bind(this);
-    this.handleAddressValChange = this.handleAddressValChange.bind(this);
-    this.handleCreditCardValChange = this.handleCreditCardValChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    // this.handleAddressValChange = this.handleAddressValChange.bind(this);
+    // this.handleCreditCardValChange = this.handleCreditCardValChange.bind(this);
   }
 
-  handleNameValChange(e) {
-    this.setState({ name: e.target.value });
-  }
+  handleChange(e) {
+    const { value, name } = e.target;
 
-  handleAddressValChange(e) {
-    this.setState({ shippingAddress: e.target.value });
-  }
-
-  handleCreditCardValChange(e) {
-    this.setState({ creditCard: e.target.value });
+    this.setState({ [name]: value });
   }
 
   render() {
-    const total = this.props.total;
+    const { total } = this.props;
+    const { name, shippingAddress, creditCard } = this.state;
+
     return (
       <section className="container w-50 checkout-container">
         <div className="row">
@@ -50,15 +50,39 @@ class CheckoutForm extends React.Component {
             <form onSubmit={ () => this.props.placeOrder(this.state)}>
               <div className="form-group">
                 <label htmlFor="name">Name:</label>
-                <input type="text" className="form-control" id="name" onChange={ this.handleNameValChange } />
+                <input
+                  name="name"
+                  type="text"
+                  className="form-control"
+                  id="name"
+                  onChange={ this.handleChange }
+                  value={ name }
+                  required
+                />
               </div>
               <div className="form-group">
                 <label htmlFor="address">Address:</label>
-                <input type="text" className="form-control" id="address" onChange={ this.handleAddressValChange } />
+                <input
+                  name="shippingAddress"
+                  type="text"
+                  className="form-control"
+                  id="address"
+                  onChange={ this.handleChange }
+                  value={ shippingAddress }
+                  required
+                />
               </div>
               <div className="form-group">
                 <label htmlFor="credit-card">Credit Card Number:</label>
-                <input type="text" className="form-control" id="credit-card" onChange={ this.handleCreditCardValChange } />
+                <input
+                  name="creditCard"
+                  type="text"
+                  className="form-control"
+                  id="credit-card"
+                  onChange={ this.handleChange }
+                  value={ creditCard }
+                  required
+                />
               </div>
               <button type="submit" className="btn btn-primary">Purchase</button>
             </form>
