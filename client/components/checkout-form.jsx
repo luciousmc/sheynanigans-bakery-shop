@@ -17,7 +17,7 @@ class CheckoutForm extends React.Component {
     // this.handleCreditCardValChange = this.handleCreditCardValChange.bind(this);
   }
 
-  onBlur(e) {
+  validateFields(e) {
     const { value, name } = e.target;
 
     switch (name) {
@@ -77,7 +77,7 @@ class CheckoutForm extends React.Component {
                   id="name"
                   onChange={ this.handleChange }
                   value={ name }
-                  onBlur={ this.onBlur }
+                  onBlur={ this.validateFields }
                   maxLength="65"
                   required
                 />
@@ -90,7 +90,7 @@ class CheckoutForm extends React.Component {
                   className="form-control"
                   id="address"
                   onChange={ this.handleChange }
-                  onBlur={ this.onBlur }
+                  onBlur={ this.validateFields }
                   value={ shippingAddress }
                   required
                 />
@@ -103,7 +103,7 @@ class CheckoutForm extends React.Component {
                   className="form-control"
                   id="credit-card"
                   onChange={ this.handleChange }
-                  onBlur={ this.onBlur }
+                  onBlur={ this.validateFields }
                   value={ creditCard }
                   required
                 />
