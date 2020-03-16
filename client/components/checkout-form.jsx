@@ -97,8 +97,16 @@ class CheckoutForm extends React.Component {
   }
 
   handleChange(e) {
-    const { value, name } = e.target;
+    const { name } = e.target;
+    let { value } = e.target;
 
+    if (name === 'creditCard' || name === 'zipcode' || name === 'cvv') {
+      const noLetters = /[A-Za-z]/gi;
+      value = value.replace(noLetters, '');
+    }
+    if (name === 'state') {
+      value = value.toUpperCase();
+    }
     this.setState({ [name]: value });
   }
 
@@ -158,6 +166,7 @@ class CheckoutForm extends React.Component {
                   onBlur={ this.validateFields }
                   onFocus={ () => this.clearErrors('addressLine') }
                   value={ addressLine }
+                  maxLength="42"
                   required
                 />
                 <div className="address-error">
@@ -174,6 +183,7 @@ class CheckoutForm extends React.Component {
                       onBlur={ this.validateFields }
                       onFocus={ () => this.clearErrors('city') }
                       value={ city }
+                      maxLength="50"
                       required
                     />
                     <div className="city-error">
@@ -181,7 +191,7 @@ class CheckoutForm extends React.Component {
                     </div>
                   </div>
                   <div className="state">
-                    <label htmlFor="city">State:</label>
+                    <label htmlFor="state">State:</label>
                     <input
                       type="text"
                       name="state"
@@ -198,7 +208,7 @@ class CheckoutForm extends React.Component {
                     </div>
                   </div>
                   <div className="zipcode">
-                    <label htmlFor="city">Zip:</label>
+                    <label htmlFor="zipcode">Zip:</label>
                     <input
                       type="text"
                       name="zipcode"
@@ -207,6 +217,7 @@ class CheckoutForm extends React.Component {
                       onBlur={ this.validateFields }
                       onFocus={ () => this.clearErrors('zipcode') }
                       value={ zipcode }
+                      maxLength="5"
                       required
                     />
                     <div className="zipcode-error">
@@ -217,7 +228,7 @@ class CheckoutForm extends React.Component {
               </div>
 
               <div className="form-group">
-                <label htmlFor="credit-card">Credit Card Number:</label>
+                <label htmlFor="creditCard">Credit Card Number:</label>
                 <input
                   name="creditCard"
                   type="text"
@@ -227,6 +238,7 @@ class CheckoutForm extends React.Component {
                   onBlur={ this.validateFields }
                   onFocus={ () => this.clearErrors('creditCard') }
                   value={ creditCard }
+                  maxLength="16"
                   required
                 />
                 <div className="credit-card-error">
