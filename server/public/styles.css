@@ -128,10 +128,14 @@ span.close-btn {
 
 /* Checkout */
 
-.name-error, .address-error, .credit-card-error {
+.name-error, .address-error, .city-error, .state-error, .zipcode-error, .credit-card-error {
   color: red;
   height: 1rem;
   font-size: .8rem;
+}
+
+.state {
+  width: 15%;
 }
 
 /* Global */
