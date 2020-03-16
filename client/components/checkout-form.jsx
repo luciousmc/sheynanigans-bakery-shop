@@ -13,8 +13,8 @@ class CheckoutForm extends React.Component {
       creditCardError: ''
     };
     this.handleChange = this.handleChange.bind(this);
-    // this.handleAddressValChange = this.handleAddressValChange.bind(this);
-    // this.handleCreditCardValChange = this.handleCreditCardValChange.bind(this);
+    this.validateFields = this.validateFields.bind(this);
+    this.clearErrors = this.clearErrors.bind(this);
   }
 
   validateFields(e) {
@@ -37,6 +37,14 @@ class CheckoutForm extends React.Component {
     console.log('this just got blurred witH: ', e.target);
   }
 
+  clearErrors() {
+    this.setState({
+      nameError: '',
+      addressError: '',
+      creditCardError: ''
+    });
+  }
+
   handleChange(e) {
     const { value, name } = e.target;
 
@@ -46,6 +54,7 @@ class CheckoutForm extends React.Component {
   render() {
     const { total } = this.props;
     const { name, shippingAddress, creditCard } = this.state;
+    const { nameError, addressError, creditCardError } = this.state;
 
     return (
       <section className="container w-50 checkout-container">
@@ -78,22 +87,30 @@ class CheckoutForm extends React.Component {
                   onChange={ this.handleChange }
                   value={ name }
                   onBlur={ this.validateFields }
+                  onFocus={ this.clearErrors }
                   maxLength="65"
                   required
                 />
+                <div className="name-error">
+                  { nameError && nameError }
+                </div>
               </div>
               <div className="form-group">
                 <label htmlFor="address">Address:</label>
                 <input
                   name="shippingAddress"
-                  type="text"
+                  type="textarea"
                   className="form-control"
                   id="address"
                   onChange={ this.handleChange }
                   onBlur={ this.validateFields }
+                  onFocus={ this.clearErrors }
                   value={ shippingAddress }
                   required
                 />
+                <div className="address-error">
+                  { addressError && addressError }
+                </div>
               </div>
               <div className="form-group">
                 <label htmlFor="credit-card">Credit Card Number:</label>
@@ -104,9 +121,13 @@ class CheckoutForm extends React.Component {
                   id="credit-card"
                   onChange={ this.handleChange }
                   onBlur={ this.validateFields }
+                  onFocus={ this.clearErrors }
                   value={ creditCard }
                   required
                 />
+                <div className="credit-card-error">
+                  { creditCardError && creditCardError }
+                </div>
               </div>
               <button type="submit" className="btn btn-primary">Purchase</button>
             </form>
