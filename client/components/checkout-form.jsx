@@ -16,7 +16,10 @@ class CheckoutForm extends React.Component {
       zipcode: '',
       zipcodeError: '',
       creditCard: '',
-      creditCardError: ''
+      creditCardError: '',
+      cvv: '',
+      cvvError: '',
+      isValid: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.validateFields = this.validateFields.bind(this);
@@ -69,8 +72,12 @@ class CheckoutForm extends React.Component {
         if (!value) {
           this.setState({ creditCardError: 'Credit Card is required' });
         }
+        break;
+      case 'cvv':
+        if (!value) {
+          this.setState({ cvvError: 'CVV is required' });
+        }
     }
-    console.log('this just got blurred witH: ', e.target);
   }
 
   clearErrors(field) {
@@ -112,8 +119,8 @@ class CheckoutForm extends React.Component {
 
   render() {
     const { total } = this.props;
-    const { name, addressLine, city, state, zipcode, creditCard } = this.state;
-    const { nameError, addressError, cityError, stateError, zipcodeError, creditCardError } = this.state;
+    const { name, addressLine, city, state, zipcode, creditCard, cvv } = this.state;
+    const { nameError, addressError, cityError, stateError, zipcodeError, creditCardError, cvvError } = this.state;
 
     return (
       <section className="container w-50 checkout-container">
@@ -134,45 +141,52 @@ class CheckoutForm extends React.Component {
         </div>
 
         <div className="row">
-          <div className="col">
-            <form onSubmit={ () => this.props.placeOrder(this.state)}>
-              <div className="form-group">
-                <label htmlFor="name">Name:</label>
-                <input
-                  name="name"
-                  type="text"
-                  className="form-control"
-                  id="name"
-                  onChange={ this.handleChange }
-                  onBlur={ this.validateFields }
-                  onFocus={ () => this.clearErrors('name') }
-                  value={ name }
-                  maxLength="65"
-                  required
-                />
-                <div className="name-error">
-                  { nameError && nameError }
+          <div className="col d-flex justify-content-center">
+            <form className="w-75" onSubmit={ () => this.props.placeOrder(this.state)}>
+              <div className="form-group row">
+                <div className="col">
+                  <label htmlFor="name">Full Name:</label>
+                  <input
+                    name="name"
+                    type="text"
+                    className="form-control"
+                    id="name"
+                    onChange={ this.handleChange }
+                    onBlur={ this.validateFields }
+                    onFocus={ () => this.clearErrors('name') }
+                    value={ name }
+                    maxLength="65"
+                    required
+                  />
+                  <div className="name-error">
+                    { nameError && nameError }
+                  </div>
                 </div>
               </div>
 
-              <div className="form-group mb-3">
-                <label htmlFor="address">Address:</label>
-                <input
-                  name="addressLine"
-                  type="text"
-                  className="form-control"
-                  id="address"
-                  onChange={ this.handleChange }
-                  onBlur={ this.validateFields }
-                  onFocus={ () => this.clearErrors('addressLine') }
-                  value={ addressLine }
-                  maxLength="42"
-                  required
-                />
-                <div className="address-error">
-                  { addressError && addressError }
+              <div className="form-group row">
+                <div className="col">
+                  <label htmlFor="address">Address:</label>
+                  <input
+                    name="addressLine"
+                    type="text"
+                    className="form-control"
+                    id="address"
+                    onChange={ this.handleChange }
+                    onBlur={ this.validateFields }
+                    onFocus={ () => this.clearErrors('addressLine') }
+                    value={ addressLine }
+                    maxLength="42"
+                    required
+                  />
+                  <div className="address-error">
+                    { addressError && addressError }
+                  </div>
                 </div>
-                <div className="address-details d-flex justify-content-between mt-3">
+              </div>
+
+              <div className="row">
+                <div className="col-4">
                   <div className="city">
                     <label htmlFor="city">City:</label>
                     <input
@@ -190,6 +204,9 @@ class CheckoutForm extends React.Component {
                       { cityError && cityError }
                     </div>
                   </div>
+                </div>
+
+                <div className="col-2">
                   <div className="state">
                     <label htmlFor="state">State:</label>
                     <input
@@ -207,6 +224,9 @@ class CheckoutForm extends React.Component {
                       { stateError && stateError }
                     </div>
                   </div>
+                </div>
+
+                <div className="col-4">
                   <div className="zipcode">
                     <label htmlFor="zipcode">Zip:</label>
                     <input
@@ -227,25 +247,55 @@ class CheckoutForm extends React.Component {
                 </div>
               </div>
 
-              <div className="form-group">
-                <label htmlFor="creditCard">Credit Card Number:</label>
-                <input
-                  name="creditCard"
-                  type="text"
-                  className="form-control"
-                  id="credit-card"
-                  onChange={ this.handleChange }
-                  onBlur={ this.validateFields }
-                  onFocus={ () => this.clearErrors('creditCard') }
-                  value={ creditCard }
-                  maxLength="16"
-                  required
-                />
-                <div className="credit-card-error">
-                  { creditCardError && creditCardError }
+              <div className="row">
+                <div className="col">
+                  <div className="form-group">
+                    <label htmlFor="creditCard">Credit Card Number:</label>
+                    <input
+                      name="creditCard"
+                      type="text"
+                      className="form-control"
+                      id="credit-card"
+                      onChange={ this.handleChange }
+                      onBlur={ this.validateFields }
+                      onFocus={ () => this.clearErrors('creditCard') }
+                      value={ creditCard }
+                      maxLength="16"
+                      required
+                    />
+                    <div className="credit-card-error">
+                      { creditCardError && creditCardError }
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-3">
+                  <div className="form-group">
+                    <label htmlFor="cvv">CVV:</label>
+                    <input
+                      name="cvv"
+                      type="text"
+                      className="form-control"
+                      id="cvv"
+                      onChange={ this.handleChange }
+                      onBlur={ this.validateFields }
+                      onFocus={ () => this.clearErrors('cvv') }
+                      value={ cvv }
+                      maxLength="4"
+                      required
+                    />
+                    <div className="credit-card-error">
+                      { cvvError && cvvError }
+                    </div>
+                  </div>
                 </div>
               </div>
-              <button type="submit" className="btn btn-primary">Purchase</button>
+
+              <div className="row">
+                <div className="col">
+                  <button type="submit" className="btn btn-primary">Purchase</button>
+                </div>
+              </div>
             </form>
           </div>
         </div>
