@@ -71,6 +71,8 @@ class CheckoutForm extends React.Component {
       case 'creditCard':
         if (!value) {
           this.setState({ creditCardError: 'Credit Card is required' });
+        } else if (value.length < 15) {
+          this.setState({ creditCardError: 'Invalid Credit Card Number' });
         }
         break;
       case 'cvv':
@@ -107,6 +109,10 @@ class CheckoutForm extends React.Component {
     const { name } = e.target;
     let { value } = e.target;
 
+    if (name === 'state') {
+      const noNumbers = /[0-9]/g;
+      value = value.replace(noNumbers, '');
+    }
     if (name === 'creditCard' || name === 'zipcode' || name === 'cvv') {
       const noLetters = /[A-Za-z]/gi;
       value = value.replace(noLetters, '');
@@ -185,8 +191,8 @@ class CheckoutForm extends React.Component {
                 </div>
               </div>
 
-              <div className="row">
-                <div className="col-4">
+              <div className="form-group row">
+                <div className="col-6">
                   <div className="city">
                     <label htmlFor="city">City:</label>
                     <input
@@ -206,7 +212,7 @@ class CheckoutForm extends React.Component {
                   </div>
                 </div>
 
-                <div className="col-2">
+                <div className="form-group col-2">
                   <div className="state">
                     <label htmlFor="state">State:</label>
                     <input
@@ -226,7 +232,7 @@ class CheckoutForm extends React.Component {
                   </div>
                 </div>
 
-                <div className="col-4">
+                <div className="form-group col-4">
                   <div className="zipcode">
                     <label htmlFor="zipcode">Zip:</label>
                     <input
