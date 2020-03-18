@@ -32,7 +32,6 @@ class ProductDetails extends React.Component {
           </div>
           <div className="row mb-5">
             <div className="col-5 product-detail-img" style={{ background: `url(${product.image}) no-repeat center/85%` }}>
-              {/* <img src={ product.image } alt=""/> */}
             </div>
             <div className="col-7">
               <h3>{ product.name }</h3>
