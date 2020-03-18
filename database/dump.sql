@@ -247,6 +247,10 @@ COPY public."cartItems" ("cartItemId", "cartId", "productId", price) FROM stdin;
 16	8	2	1899
 17	9	1	1500
 18	10	4	2999
+19	11	2	1899
+20	11	1	1500
+21	12	1	1500
+22	12	1	1500
 \.
 
 
@@ -265,6 +269,8 @@ COPY public.carts ("cartId", "createdAt") FROM stdin;
 8	2020-03-13 19:11:45.669578-07
 9	2020-03-16 00:05:23.865295-07
 10	2020-03-16 23:28:15.121004-07
+11	2020-03-17 00:12:59.842516-07
+12	2020-03-17 00:17:58.933214-07
 \.
 
 
@@ -273,6 +279,8 @@ COPY public.carts ("cartId", "createdAt") FROM stdin;
 --
 
 COPY public.orders ("orderId", "cartId", name, "creditCard", "shippingAddress", "createdAt") FROM stdin;
+1	10	Brandon McPeak	5555555555555555	123 Candy CAne Lane Ontario CA 92715	2020-03-17 00:07:56.915466-07
+2	11	Brandon McPeak	3333333333333333	123 Candy CAne Lane Ontario, CA 92715	2020-03-17 00:14:36.754436-07
 \.
 
 
@@ -287,6 +295,10 @@ COPY public.products ("productId", name, price, image, "shortDescription", "long
 4	Strawberry Cheesecake	2999	/images/bakery/strawberry-cheesecake.jpg	Made with homemade strawberry jam. Nothing says comfort like a creamy, fruity cheesecake.	Made with strawberries picked from our very own garden. This cheesecake is sure to leave you wanting more. Jam is marbled throug the cheesecake to ensure a nice fruity bite every time. Price is for a 12" pie. Custom messages can be added at your request.
 5	Magic Cinnamon Rolls	799	/images/bakery/magic-cinnamon-rolls.jpg	A twist on the classic cinnamon roll with a surprise inside	Powered with crushed oreo cookie crumbs then topped off with our secret glaze. The reamy filling will have you questioning the wizardry behind this treat.
 6	Ube Stuffed Croissants	1599	/images/bakery/ube-stuffed-croissants.jpg	Buttery-sweet goodness in every bite!	Golden crisped buttery croissants are filled with a healthy serving of Ube to bring a subtle sweet texture to the dessert. Ube is a type of purple yam that is common ingredient in asian desserts.
+7	Blueberry Cheesecake Muffins	2000	/images/bakery/blueberry-cheesecake-muffins.png	Box of 12. Not too sweet. Just enough to satisfy that sweet craving	Fresh blueberries mixed into our proprietary mix of cream cheese and sugar with a little secret ingredient to create the perfect balance between sweet and moist
+8	Cupcakes	1199	/images/bakery/cupcake.jpg	Box of 15. Pick from chocolate, vanilla, red velvet, carrot, pumpkin and blueberry	Made to order. Fully customizable. Our frostings include buttercrem, cream cheese, chocolate and strawberry.
+9	Milk Tea	695	/images/bakery/milk-tea.jpg	In store only. Classic milk tea	Add-ons include tapioca pearls, taro balls, mango jelly and egg pudding
+10	Green Tea Cheese Foam	799	/images/bakery/green-tea-cheese-foam.JPG	In store only. Organic green tea topped with a sweet cheese foam	Add-ons include tapioca pearls, taro balls, mango jelly and egg pudding
 \.
 
 
@@ -294,28 +306,28 @@ COPY public.products ("productId", name, price, image, "shortDescription", "long
 -- Name: cartItems_cartItemId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 18, true);
+SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 22, true);
 
 
 --
 -- Name: carts_cardId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."carts_cardId_seq"', 10, true);
+SELECT pg_catalog.setval('public."carts_cardId_seq"', 12, true);
 
 
 --
 -- Name: orders_orderId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."orders_orderId_seq"', 1, false);
+SELECT pg_catalog.setval('public."orders_orderId_seq"', 2, true);
 
 
 --
 -- Name: products_productId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."products_productId_seq"', 6, true);
+SELECT pg_catalog.setval('public."products_productId_seq"', 10, true);
 
 
 --
