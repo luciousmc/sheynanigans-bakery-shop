@@ -11,7 +11,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showItemAddedModal: true,
+      showItemAddedModal: false,
       showModal: false,
       view: {
         name: 'catalog',
@@ -22,6 +22,7 @@ class App extends Component {
     this.setView = this.setView.bind(this);
     this.removeModal = this.removeModal.bind(this);
     this.showItemAddedModal = this.showItemAddedModal.bind(this);
+    this.hideItemAddedModal = this.hideItemAddedModal.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.placeOrder = this.placeOrder.bind(this);
   }
@@ -47,7 +48,7 @@ class App extends Component {
   }
 
   hideItemAddedModal() {
-    document.getElementById('item-added-modal').style.display = 'none';
+    this.setState({ showItemAddedModal: false });
   }
 
   addToCart(product) {
@@ -118,7 +119,7 @@ class App extends Component {
     }
     return (
       <div className={ 'pb-5 ' + overflow }>
-        { this.state.showItemAddedModal && <ItemAddedModal /> }
+        { this.state.showItemAddedModal && <ItemAddedModal setView={ this.setView } hideItemAddedModal={this.hideItemAddedModal}/> }
         { this.state.showModal && <DisclaimerModal firstVisit={ this.state.showModal } removeModal={ this.removeModal } /> }
         <Header cartItemAmt={ this.state.cart.length } setView={ this.setView } />
         { renderView }
