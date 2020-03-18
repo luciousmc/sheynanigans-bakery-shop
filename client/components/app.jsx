@@ -12,7 +12,7 @@ class App extends Component {
     this.state = {
       showModal: true,
       view: {
-        name: 'checkout',
+        name: 'catalog',
         params: {}
       },
       cart: []

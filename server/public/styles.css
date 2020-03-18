@@ -128,7 +128,20 @@ span.close-btn {
 
 /* Checkout */
 
+#name-error, #address-error, #city-error, #state-error, #zipcode-error, #credit-card-error, #cvv-error {
+  visibility: hidden;
+  color: red;
+  height: 1rem;
+  font-size: .8rem;
+}
 
+.btn-complete {
+  background-color: var(--green);
+}
+.btn-incomplete {
+  pointer-events: none;
+  background-color: gray;
+}
 
 /* Global */
 
