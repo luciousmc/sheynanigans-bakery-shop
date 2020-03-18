@@ -107,10 +107,7 @@ class App extends Component {
     }
     return (
       <div className={ 'pb-5 ' + overflow }>
-        { this.state.showModal
-          ? <DisclaimerModal firstVisit={ this.state.showModal } removeModal={ this.removeModal } />
-          : ''
-        }
+        { this.state.showModal && <DisclaimerModal firstVisit={ this.state.showModal } removeModal={ this.removeModal } /> }
         <Header cartItemAmt={ this.state.cart.length } setView={ this.setView } />
         { renderView }
       </div>

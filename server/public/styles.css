@@ -39,10 +39,14 @@ body::after {
   z-index: 10;
 }
 
-.modal-screen .modal-box {
+.modal-screen .modal-box, .item-added-box {
   background-color: whitesmoke;
   width: 50%;
   border: 5px solid black;
+}
+
+.item-added-box {
+  width: 25%;
 }
 
 span.close-btn {

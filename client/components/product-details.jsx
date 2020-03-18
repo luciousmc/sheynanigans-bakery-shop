@@ -17,12 +17,13 @@ class ProductDetails extends React.Component {
   }
 
   render() {
-    if (!this.state.product) {
+    const { product } = this.state;
+
+    if (!product) {
       return (
         <h1>Loading...</h1>
       );
     } else {
-      const { product } = this.state;
       return (
         <section className="container mb-3 w-75 rounded detail-container">
           <div className="row">
