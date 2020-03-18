@@ -5,12 +5,14 @@ import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
 import CheckoutForm from './checkout-form';
 import DisclaimerModal from './disclaimer';
+import ItemAddedModal from './item-added-modal';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showModal: true,
+      showItemAddedModal: true,
+      showModal: false,
       view: {
         name: 'catalog',
         params: {}
@@ -19,6 +21,7 @@ class App extends Component {
     };
     this.setView = this.setView.bind(this);
     this.removeModal = this.removeModal.bind(this);
+    this.showItemAddedModal = this.showItemAddedModal.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.placeOrder = this.placeOrder.bind(this);
   }
@@ -39,6 +42,14 @@ class App extends Component {
     this.setState({ showModal: false });
   }
 
+  showItemAddedModal() {
+    this.setState({ showItemAddedModal: true });
+  }
+
+  hideItemAddedModal() {
+    document.getElementById('item-added-modal').style.display = 'none';
+  }
+
   addToCart(product) {
     const fetchOptions = {
       method: 'POST',
@@ -51,7 +62,7 @@ class App extends Component {
     fetch('/api/cart', fetchOptions)
       .then(response => response.json())
       .then(item => {
-        this.setState({ cart: [...this.state.cart, item] });
+        this.setState({ cart: [...this.state.cart, item] }, this.showItemAddedModal);
       })
       .catch(error => console.error(error));
   }
@@ -107,6 +118,7 @@ class App extends Component {
     }
     return (
       <div className={ 'pb-5 ' + overflow }>
+        { this.state.showItemAddedModal && <ItemAddedModal /> }
         { this.state.showModal && <DisclaimerModal firstVisit={ this.state.showModal } removeModal={ this.removeModal } /> }
         <Header cartItemAmt={ this.state.cart.length } setView={ this.setView } />
         { renderView }
