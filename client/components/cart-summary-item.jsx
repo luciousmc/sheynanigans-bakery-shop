@@ -17,7 +17,7 @@ function CartSummaryItem(props) {
             <p className="lead">{ '$' + (props.cartItem.price / 100).toFixed(2) }</p>
           </div>
           <div className="col">
-            <div className="form-group">
+            <div className="form-group text-right">
               <label htmlFor="qty">Qty:</label>
               <input type="number" id="qty" name="quantity" value={ quantity } onChange={ e => setQuantity(e.target.value)} />
             </div>

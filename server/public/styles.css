@@ -131,7 +131,9 @@ span.close-btn {
 }
 
 #qty {
-  width: 15%;
+  width: 3rem;
+  padding: 2px;
+  text-align: center;
 }
 
 input[type="number"]::-webkit-inner-spin-button,
