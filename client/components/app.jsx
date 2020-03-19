@@ -14,7 +14,7 @@ class App extends Component {
       showItemAddedModal: false,
       showModal: false,
       view: {
-        name: 'catalog',
+        name: 'cart',
         params: {}
       },
       cart: []

@@ -130,6 +130,15 @@ span.close-btn {
   object-fit: cover;
 }
 
+#qty {
+  width: 15%;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  opacity: 1;
+}
+
 /* Checkout */
 
 #name-error, #address-error, #city-error, #state-error, #zipcode-error, #credit-card-error, #cvv-error {
