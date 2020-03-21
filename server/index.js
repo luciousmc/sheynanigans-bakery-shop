@@ -113,9 +113,14 @@ app.post('/api/cart', (req, res, next) => {
 app.delete('/api/cart/:cartItemId', (req, res, next) => {
   const { cartItemId } = req.params;
 
+  if (!cartItemId) {
+    res.status(400).json({ error: 'Must provide a valid cart item id ' });
+  }
+
   const sqlDeleteItem = `
     DELETE FROM "cartItems"
-    WHERE       "cartItemId" = $1`;
+    WHERE       "cartItemId" = $1
+    RETURNING *`;
   const values = [cartItemId];
 
   db.query(sqlDeleteItem, values)

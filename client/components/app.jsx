@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { Component } from 'react';
 import Header from './header';
 import ProductList from './product-list';
@@ -14,7 +15,7 @@ class App extends Component {
       showItemAddedModal: false,
       showModal: false,
       view: {
-        name: 'cart',
+        name: 'catalog',
         params: {}
       },
       cart: []
@@ -24,6 +25,7 @@ class App extends Component {
     this.showItemAddedModal = this.showItemAddedModal.bind(this);
     this.hideItemAddedModal = this.hideItemAddedModal.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    this.removeFromCart = this.removeFromCart.bind(this);
     this.placeOrder = this.placeOrder.bind(this);
   }
 
@@ -68,6 +70,29 @@ class App extends Component {
       .catch(error => console.error(error));
   }
 
+  removeFromCart(cartItemId) {
+
+    const fetchOptions = {
+      method: 'DELETE'
+    };
+
+    fetch(`/api/cart/${cartItemId}`, fetchOptions)
+      .then(response => {
+
+        if (response.ok) {
+          let newCart = [...this.state.cart];
+
+          newCart = newCart.filter(product => {
+            if (product.cartItemId !== cartItemId) {
+              return true;
+            }
+          });
+          this.setState({ cart: newCart });
+        }
+      })
+      .catch(error => console.error(error));
+  }
+
   placeOrder(customer) {
     const fetchOptions = {
       method: 'POST',
@@ -107,7 +132,7 @@ class App extends Component {
           addToCart={ this.addToCart }
         />);
     } else if (this.state.view.name === 'cart') {
-      renderView = <CartSummary list={ this.state.cart } setView={ this.setView } />;
+      renderView = <CartSummary list={ this.state.cart } setView={ this.setView } removeFromCart={ this.removeFromCart } />;
     } else {
       renderView = (
         <CheckoutForm
@@ -121,6 +146,7 @@ class App extends Component {
       <div className={ 'pb-5 ' + overflow }>
         { this.state.showItemAddedModal && <ItemAddedModal setView={ this.setView } hideItemAddedModal={this.hideItemAddedModal}/> }
         { this.state.showModal && <DisclaimerModal firstVisit={ this.state.showModal } removeModal={ this.removeModal } /> }
+
         <Header cartItemAmt={ this.state.cart.length } setView={ this.setView } />
         { renderView }
       </div>

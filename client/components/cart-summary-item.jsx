@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 
-function CartSummaryItem(props) {
+function CartSummaryItem({ cartItem, removeFromCart }) {
   const [quantity, setQuantity] = useState(0);
 
   return (
     <div className="row cart-item border border-secondary rounded p-3 mb-2 w-75 mx-auto">
       <div className="col-3">
-        <img className="cart-img" src={ props.cartItem.image } alt=""/>
+        <img className="cart-img" src={ cartItem.image } alt=""/>
       </div>
       <div className="col-9">
         <div className="row">
-          <h5>{ props.cartItem.name }</h5>
+          <h5>{ cartItem.name }</h5>
         </div>
         <div className="row">
           <div className="col">
-            <p className="lead">{ '$' + (props.cartItem.price / 100).toFixed(2) }</p>
+            <p className="lead">{ '$' + (cartItem.price / 100).toFixed(2) }</p>
           </div>
           <div className="col">
             <div className="form-group text-right">
@@ -24,7 +24,14 @@ function CartSummaryItem(props) {
           </div>
         </div>
         <div className="row">
-          <p>{ props.cartItem.shortDescription }</p>
+          <p>{ cartItem.shortDescription }</p>
+        </div>
+        <div className="row">
+          <div className="col text-right">
+            <div className="d-inline lead text-danger link" onClick={ () => removeFromCart(cartItem.cartItemId) }>
+              Remove from cart
+            </div>
+          </div>
         </div>
       </div>
     </div>

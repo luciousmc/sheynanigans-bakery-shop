@@ -11,7 +11,7 @@ function CartSummary(props) {
     body = (
       props.list.map(item => {
         total += item.price;
-        return <CartSummaryItem cartItem={ item } key={ item.cartItemId } />;
+        return <CartSummaryItem cartItem={ item } key={ item.cartItemId } removeFromCart={ props.removeFromCart }/>;
       })
     );
     totalTxt = (
@@ -26,9 +26,9 @@ function CartSummary(props) {
     <section className="container w-80 rounded cart-summary-container">
       <div className="row">
         <div className="col-12">
-          <a href="" onClick={ () => props.setView('catalog', {}) } className="btn-back-to-catalog">
+          <div onClick={ () => props.setView('catalog', {}) } className="d-inline lead text-primary link">
             &lt; Back to Catalog
-          </a>
+          </div>
         </div>
       </div>
       <div className="row">
