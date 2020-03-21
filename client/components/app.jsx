@@ -46,7 +46,9 @@ class App extends Component {
   }
 
   showItemAddedModal() {
-    this.setState({ showItemAddedModal: true });
+    if (this.state.showItemAddedModal) {
+      this.setState({ showItemAddedModal: true });
+    }
   }
 
   hideItemAddedModal() {
@@ -70,20 +72,20 @@ class App extends Component {
       .catch(error => console.error(error));
   }
 
-  removeFromCart(cartItemId) {
+  removeFromCart(productId) {
 
     const fetchOptions = {
       method: 'DELETE'
     };
 
-    fetch(`/api/cart/${cartItemId}`, fetchOptions)
+    fetch(`/api/cart/${productId}`, fetchOptions)
       .then(response => {
 
         if (response.ok) {
           let newCart = [...this.state.cart];
 
           newCart = newCart.filter(product => {
-            if (product.cartItemId !== cartItemId) {
+            if (product.productId !== productId) {
               return true;
             }
           });
@@ -132,7 +134,13 @@ class App extends Component {
           addToCart={ this.addToCart }
         />);
     } else if (this.state.view.name === 'cart') {
-      renderView = <CartSummary list={ this.state.cart } setView={ this.setView } removeFromCart={ this.removeFromCart } />;
+      renderView = (
+        <CartSummary
+          list={ this.state.cart }
+          setView={ this.setView }
+          addToCart={ this.addToCart }
+          removeFromCart={ this.removeFromCart }
+        />);
     } else {
       renderView = (
         <CheckoutForm

@@ -1,7 +1,7 @@
 import React from 'react';
 import CartSummaryItem from './cart-summary-item';
 
-function CartSummary({ list, removeFromCart, setView }) {
+function CartSummary({ list, addToCart, removeFromCart, setView }) {
   const listLen = list.length;
   let body, totalTxt;
   let total = 0;
@@ -10,6 +10,7 @@ function CartSummary({ list, removeFromCart, setView }) {
     body = <h3>There are no items in the cart</h3>;
   } else {
     const productMultiplier = {};
+
     for (let i = 0; i < listLen; i++) {
       if (productMultiplier[list[i].productId]) {
         productMultiplier[list[i].productId] = productMultiplier[list[i].productId] + 1;
@@ -17,10 +18,18 @@ function CartSummary({ list, removeFromCart, setView }) {
         productMultiplier[list[i].productId] = 1;
       }
     }
+
     body = (
       list.map((item, index, list) => {
         total += item.price;
-        return <CartSummaryItem multiplier={ productMultiplier[item.productId] } cartItem={ item } key={ item.cartItemId } removeFromCart={ removeFromCart }/>;
+        return (
+          <CartSummaryItem
+            multiplier={ productMultiplier[item.productId] }
+            cartItem={ item }
+            key={ item.cartItemId }
+            addToCart={ addToCart }
+            removeFromCart={ removeFromCart }
+          />);
       })
     );
     totalTxt = (
@@ -31,6 +40,7 @@ function CartSummary({ list, removeFromCart, setView }) {
       </div>
     );
   }
+
   return (
     <section className="container w-80 rounded cart-summary-container">
       <div className="row">

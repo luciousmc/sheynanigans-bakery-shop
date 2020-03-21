@@ -1,7 +1,20 @@
 import React, { useState } from 'react';
 
-function CartSummaryItem({ cartItem, removeFromCart, multiplier }) {
+function CartSummaryItem({ cartItem, addToCart, removeFromCart, multiplier }) {
   const [quantity, setQuantity] = useState(multiplier);
+
+  const onQtyChange = async e => {
+    const { value } = e.target;
+
+    if (value > quantity) {
+      const amt = value - quantity;
+
+      for (let count = 0; count < amt; count++) {
+        await addToCart(cartItem);
+        setQuantity(quantity + amt);
+      }
+    }
+  };
 
   return (
     <div className="row cart-item border border-secondary rounded p-3 mb-2 w-75 mx-auto">
@@ -19,7 +32,7 @@ function CartSummaryItem({ cartItem, removeFromCart, multiplier }) {
           <div className="col">
             <div className="form-group text-right">
               <label htmlFor="qty">Qty:</label>
-              <input type="number" id="qty" name="quantity" value={ quantity } onChange={ e => setQuantity(e.target.value)} />
+              <input type="number" id="qty" name="quantity" value={ quantity } onChange={ onQtyChange } />
             </div>
           </div>
         </div>
@@ -28,7 +41,7 @@ function CartSummaryItem({ cartItem, removeFromCart, multiplier }) {
         </div>
         <div className="row">
           <div className="col text-right">
-            <div className="d-inline lead text-danger link" onClick={ () => removeFromCart(cartItem.cartItemId) }>
+            <div className="d-inline lead text-danger link" onClick={ () => removeFromCart(cartItem.productId) }>
               Remove from cart
             </div>
           </div>
