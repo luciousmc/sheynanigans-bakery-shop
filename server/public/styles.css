@@ -15,7 +15,8 @@
 body {
   position: relative;
   background-image: repeating-linear-gradient(to right, var(--green) 0, var(--green) 2%, var(--blue) 2% 4%);
-  height: 100%;
+  min-height: 100vh;
+  min-width: 100vw;
 }
 
 body::after {
