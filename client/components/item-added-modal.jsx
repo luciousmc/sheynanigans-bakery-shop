@@ -7,7 +7,7 @@ export default function ItemAddedModal(props) {
   }
 
   return (
-    <section className="modal-screen d-flex justify-content-center align-items-center" id="item-added-modal">
+    <section onClick={ () => props.hideItemAddedModal()} className="modal-screen d-flex justify-content-center align-items-center" id="item-added-modal">
       <div className="container item-added-box p-3">
         <div className="row">
           <div className="col">
@@ -21,11 +21,10 @@ export default function ItemAddedModal(props) {
           </div>
         </div>
         <div className="row">
-          <div className="col">
-            <div className="btn btn-dark d-block m-3">Add Another</div>
-            <div className="btn btn-dark d-block m-3" onClick={ () => useNextStep('cart')}>Go to Cart</div>
-            <div className="btn btn-dark d-block m-3" onClick={ () => useNextStep('checkout')}>Checkout</div>
-            <div className="btn btn-dark d-block m-3" onClick={ () => useNextStep('catalog')}>Continue Shopping</div>
+          <div className="col text-center">
+            <button className="btn btn-dark btn-block my-3" onClick={ () => useNextStep('cart')}>Go to Cart</button>
+            <button className="btn btn-dark btn-block my-3" onClick={ () => useNextStep('checkout')}>Checkout</button>
+            <button className="btn btn-dark btn-block my-3" onClick={ () => useNextStep('catalog')}>Continue Shopping</button>
           </div>
         </div>
       </div>
