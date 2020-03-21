@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-function CartSummaryItem({ cartItem, removeFromCart }) {
-  const [quantity, setQuantity] = useState(0);
+function CartSummaryItem({ cartItem, removeFromCart, multiplier }) {
+  const [quantity, setQuantity] = useState(multiplier);
 
   return (
     <div className="row cart-item border border-secondary rounded p-3 mb-2 w-75 mx-auto">
@@ -14,7 +14,7 @@ function CartSummaryItem({ cartItem, removeFromCart }) {
         </div>
         <div className="row">
           <div className="col">
-            <p className="lead">{ '$' + (cartItem.price / 100).toFixed(2) }</p>
+            <p className="lead">{ '$' + (cartItem.price * multiplier / 100).toFixed(2) }</p>
           </div>
           <div className="col">
             <div className="form-group text-right">

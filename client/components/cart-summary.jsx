@@ -1,17 +1,26 @@
 import React from 'react';
 import CartSummaryItem from './cart-summary-item';
 
-function CartSummary(props) {
+function CartSummary({ list, removeFromCart, setView }) {
+  const listLen = list.length;
   let body, totalTxt;
   let total = 0;
 
-  if (props.list.length === 0) {
+  if (listLen === 0) {
     body = <h3>There are no items in the cart</h3>;
   } else {
+    const productMultiplier = {};
+    for (let i = 0; i < listLen; i++) {
+      if (productMultiplier[list[i].productId]) {
+        productMultiplier[list[i].productId] = productMultiplier[list[i].productId] + 1;
+      } else {
+        productMultiplier[list[i].productId] = 1;
+      }
+    }
     body = (
-      props.list.map(item => {
+      list.map((item, index, list) => {
         total += item.price;
-        return <CartSummaryItem cartItem={ item } key={ item.cartItemId } removeFromCart={ props.removeFromCart }/>;
+        return <CartSummaryItem multiplier={ productMultiplier[item.productId] } cartItem={ item } key={ item.cartItemId } removeFromCart={ removeFromCart }/>;
       })
     );
     totalTxt = (
@@ -26,7 +35,7 @@ function CartSummary(props) {
     <section className="container w-80 rounded cart-summary-container">
       <div className="row">
         <div className="col-12">
-          <div onClick={ () => props.setView('catalog', {}) } className="d-inline lead text-primary link">
+          <div onClick={ () => setView('catalog', {}) } className="d-inline lead text-primary link">
             &lt; Back to Catalog
           </div>
         </div>
@@ -40,7 +49,7 @@ function CartSummary(props) {
       { body }
       { totalTxt }
       <div className="col text-right p-3">
-        <button className="btn btn-dark" onClick={ () => props.setView('checkout', { total })}>Checkout</button>
+        <button className="btn btn-dark" onClick={ () => setView('checkout', { total })}>Checkout</button>
       </div>
     </section>
   );
