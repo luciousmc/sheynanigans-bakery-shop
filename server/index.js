@@ -110,7 +110,7 @@ app.post('/api/cart', (req, res, next) => {
 });
 
 // DELETE from cart
-app.delete('/api/cart/:productId', (req, res, next) => {
+app.delete('/api/cart/:productId/all', (req, res, next) => {
   const { productId } = req.params;
 
   if (!productId) {
@@ -122,6 +122,25 @@ app.delete('/api/cart/:productId', (req, res, next) => {
     WHERE       "productId" = $1
     RETURNING *`;
   const values = [productId];
+
+  db.query(sqlDeleteItem, values)
+    .then(result => res.sendStatus(204))
+    .catch(err => next(err));
+});
+
+// DELETE single item from cart
+app.delete('/api/cart/:cartItemId', (req, res, next) => {
+  const { cartItemId } = req.params;
+
+  if (!cartItemId) {
+    res.status(400).json({ error: 'Must provide a valid cart item id ' });
+  }
+
+  const sqlDeleteItem = `
+    DELETE FROM "cartItems"
+    WHERE       "cartItemId" = $1
+    RETURNING *`;
+  const values = [cartItemId];
 
   db.query(sqlDeleteItem, values)
     .then(result => res.sendStatus(204))

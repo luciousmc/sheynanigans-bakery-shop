@@ -1,17 +1,28 @@
 import React, { useState } from 'react';
 
-function CartSummaryItem({ cartItem, addToCart, removeFromCart, multiplier }) {
-  const [quantity, setQuantity] = useState(multiplier);
+/** Returns a single Cart Item */
+function CartSummaryItem({ cartItem, addToCart, removeSingleItem, removeFromCart, params }) {
+  const [quantity, setQuantity] = useState(params.multiplier);
 
-  const onQtyChange = async e => {
+  /**
+   * Updates the quantity of the product in the cart based on the number set
+   */
+  const onQtyChange = e => {
     const { value } = e.target;
 
     if (value > quantity) {
       const amt = value - quantity;
-
       for (let count = 0; count < amt; count++) {
-        await addToCart(cartItem);
+        addToCart(cartItem);
         setQuantity(quantity + amt);
+      }
+    }
+
+    if (quantity > value) {
+      const amt = quantity - value;
+      for (let count = 0; count < amt; count++) {
+        removeSingleItem(cartItem.cartItemId);
+        setQuantity(quantity - amt);
       }
     }
   };
@@ -27,7 +38,7 @@ function CartSummaryItem({ cartItem, addToCart, removeFromCart, multiplier }) {
         </div>
         <div className="row">
           <div className="col">
-            <p className="lead">{ '$' + (cartItem.price * multiplier / 100).toFixed(2) }</p>
+            <p className="lead">{ '$' + (cartItem.price * params.multiplier / 100).toFixed(2) }</p>
           </div>
           <div className="col">
             <div className="form-group text-right">

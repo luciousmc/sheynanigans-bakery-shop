@@ -18,7 +18,8 @@ class App extends Component {
         name: 'catalog',
         params: {}
       },
-      cart: []
+      cart: [],
+      cartTotal: 0
     };
     this.setView = this.setView.bind(this);
     this.removeModal = this.removeModal.bind(this);
@@ -26,13 +27,35 @@ class App extends Component {
     this.hideItemAddedModal = this.hideItemAddedModal.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.removeFromCart = this.removeFromCart.bind(this);
+    this.removeSingleItem = this.removeSingleItem.bind(this);
+    this.calcTotal = this.calcTotal.bind(this);
     this.placeOrder = this.placeOrder.bind(this);
   }
 
+  /**
+   * Once the component loads, get the cart items from the database
+   */
   componentDidMount() {
     this.getCartItems();
   }
 
+  /**
+   * Calculates the current total cost of all items added to the cart
+   */
+  calcTotal() {
+    const { cart } = this.state;
+    const cartLen = cart.length;
+    let subTotal = 0;
+
+    for (let item = 0; item < cartLen; item++) {
+      subTotal += cart[item].price;
+    }
+    this.setState({ cartTotal: subTotal });
+  }
+
+  /**
+   * Sends a request to the server API to get all items in the cart
+   */
   getCartItems() {
     fetch('/api/cart')
       .then(response => response.json())
@@ -41,20 +64,33 @@ class App extends Component {
       });
   }
 
+  /**
+   * Hides the disclaimer Modal
+   */
   removeModal() {
     this.setState({ showModal: false });
   }
 
+  /**
+   * Displays the modal that will ask user for further action after adding an item to the cart
+   */
   showItemAddedModal() {
-    if (this.state.showItemAddedModal) {
+    if (this.state.view.name === 'details') {
       this.setState({ showItemAddedModal: true });
     }
   }
 
+  /**
+   * Hides the modal where the item was added
+   */
   hideItemAddedModal() {
     this.setState({ showItemAddedModal: false });
   }
 
+  /**
+   * Adds a single product to the cart
+   * @param {{Object}} product - Takes an object filled with product data
+   */
   addToCart(product) {
     const fetchOptions = {
       method: 'POST',
@@ -72,13 +108,12 @@ class App extends Component {
       .catch(error => console.error(error));
   }
 
+  /**
+   * Removes all added instances of a product from the cart
+   * @param {number} productId - Takes the product Id to be removed from the cart. NOT the cartItemId
+   */
   removeFromCart(productId) {
-
-    const fetchOptions = {
-      method: 'DELETE'
-    };
-
-    fetch(`/api/cart/${productId}`, fetchOptions)
+    fetch(`/api/cart/${productId}/all`, { method: 'DELETE' })
       .then(response => {
 
         if (response.ok) {
@@ -95,6 +130,32 @@ class App extends Component {
       .catch(error => console.error(error));
   }
 
+  /**
+   * Remove a single occurence of an item from the database
+   * @param {number} cartItemId - Id of the cart item to be removed.
+   */
+  removeSingleItem(cartItemId) {
+    fetch(`/api/cart/${cartItemId}`, { method: 'DELETE' })
+      .then(response => {
+
+        if (response.ok) {
+          let newCart = [...this.state.cart];
+
+          newCart = newCart.filter(product => {
+            if (product.cartItemId !== cartItemId) {
+              return true;
+            }
+          });
+          this.setState({ cart: newCart });
+        }
+      })
+      .catch(error => console.error(error));
+  }
+
+  /**
+   * Sends a request to the server API to place an order
+   * @param {{Object}} customer - Takes an object filled with customer data
+   */
   placeOrder(customer) {
     const fetchOptions = {
       method: 'POST',
@@ -116,6 +177,11 @@ class App extends Component {
       });
   }
 
+  /**
+   * Sets the view for the app. Default is 'catalog'.
+   * @param {string} name - Name of the view to be displayed
+   * @param {{Object}} params - Object holding aditional parameters for the view
+   */
   setView(name, params) {
     this.setState({ view: { name, params } });
   }
@@ -136,17 +202,19 @@ class App extends Component {
     } else if (this.state.view.name === 'cart') {
       renderView = (
         <CartSummary
-          list={ this.state.cart }
+          cartItems={ this.state.cart }
           setView={ this.setView }
           addToCart={ this.addToCart }
           removeFromCart={ this.removeFromCart }
+          removeSingleItem={ this.removeSingleItem }
+          total={ this.state.cartTotal }
         />);
     } else {
       renderView = (
         <CheckoutForm
           setView={ this.setView }
           placeOrder={ this.placeOrder }
-          total={ this.state.view.params.total }
+          total={ this.state.cartTotal }
         />
       );
     }
@@ -155,7 +223,7 @@ class App extends Component {
         { this.state.showItemAddedModal && <ItemAddedModal setView={ this.setView } hideItemAddedModal={this.hideItemAddedModal}/> }
         { this.state.showModal && <DisclaimerModal firstVisit={ this.state.showModal } removeModal={ this.removeModal } /> }
 
-        <Header cartItemAmt={ this.state.cart.length } setView={ this.setView } />
+        <Header calcTotal={ this.calcTotal } cartItemAmt={ this.state.cart.length } setView={ this.setView } />
         { renderView }
       </div>
     );

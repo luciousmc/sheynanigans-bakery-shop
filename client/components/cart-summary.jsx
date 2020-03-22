@@ -1,35 +1,44 @@
 import React from 'react';
 import CartSummaryItem from './cart-summary-item';
 
-function CartSummary({ list, addToCart, removeFromCart, setView }) {
-  const listLen = list.length;
+function CartSummary({ cartItems, total, addToCart, removeFromCart, removeSingleItem, setView }) {
+  const listLen = cartItems.length;
   let body, totalTxt;
-  let total = 0;
 
   if (listLen === 0) {
     body = <h3>There are no items in the cart</h3>;
   } else {
-    const productMultiplier = {};
+    const params = {};
 
     for (let i = 0; i < listLen; i++) {
-      if (productMultiplier[list[i].productId]) {
-        productMultiplier[list[i].productId] = productMultiplier[list[i].productId] + 1;
+      const product = cartItems[i];
+      const { productId, cartItemId } = product;
+
+      if (params[productId]) {
+        params[productId].multiplier += 1;
+        params[productId].ids.push(cartItemId);
       } else {
-        productMultiplier[list[i].productId] = 1;
+        params[productId] = {
+          multiplier: 1,
+          ids: [cartItemId]
+        };
       }
     }
+    // const tester = cartItems.filter((item, index, list) => {
 
+    // });
     body = (
-      list.map((item, index, list) => {
-        total += item.price;
+      cartItems.map((item, index, list) => {
         return (
           <CartSummaryItem
-            multiplier={ productMultiplier[item.productId] }
+            params={ params[item.productId] }
             cartItem={ item }
             key={ item.cartItemId }
             addToCart={ addToCart }
             removeFromCart={ removeFromCart }
-          />);
+            removeSingleItem={ removeSingleItem }
+          />
+        );
       })
     );
     totalTxt = (
@@ -59,7 +68,7 @@ function CartSummary({ list, addToCart, removeFromCart, setView }) {
       { body }
       { totalTxt }
       <div className="col text-right p-3">
-        <button className="btn btn-dark" onClick={ () => setView('checkout', { total })}>Checkout</button>
+        <button className="btn btn-dark" onClick={ () => setView('checkout', {})}>Checkout</button>
       </div>
     </section>
   );
