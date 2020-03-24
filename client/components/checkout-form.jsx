@@ -25,6 +25,7 @@ class CheckoutForm extends React.Component {
     this.validateFields = this.validateFields.bind(this);
     this.showErrors = this.showErrors.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleNoSubmit = this.handleNoSubmit.bind(this);
   }
 
   validateFields(e) {
@@ -129,15 +130,6 @@ class CheckoutForm extends React.Component {
     }
   }
 
-  // validateForm() {
-  //   // Create local variables from the state for err messages
-  //   const { nameError, addressError, cityError, stateError, zipcodeError, creditCardError, cvvError } = this.state;
-
-  //   if (!nameError && !addressError && !cityError && !stateError && !zipcodeError && !creditCardError && !cvvError) {
-  //     this.setState({ isValid: true });
-  //   }
-  // }
-
   showErrors(e) {
     const { name } = e.target;
     const { nameError, addressError, cityError, stateError, zipcodeError, creditCardError, cvvError } = this.state;
@@ -185,7 +177,18 @@ class CheckoutForm extends React.Component {
   }
 
   handleNoSubmit(e) {
+    e.preventDefault();
+    this.showAllErrors();
+  }
 
+  showAllErrors() {
+    document.getElementById('name-error').style.visibility = 'visible';
+    document.getElementById('address-error').style.visibility = 'visible';
+    document.getElementById('city-error').style.visibility = 'visible';
+    document.getElementById('state-error').style.visibility = 'visible';
+    document.getElementById('zipcode-error').style.visibility = 'visible';
+    document.getElementById('credit-card-error').style.visibility = 'visible';
+    document.getElementById('cvv-error').style.visibility = 'visible';
   }
 
   handleChange(e) {
@@ -481,8 +484,9 @@ class CheckoutForm extends React.Component {
               <div className="row">
                 <div className="col">
                   {
-                    isValid ? <button type="submit" className="btn btn-complete">Purchase</button>
-                      : <button type="button" className="btn btn-incomplete" onClick={ e => this.handleNoSubmit } disabled>Purchase</button>
+                    isValid
+                      ? <button type="submit" className="btn btn-complete">Purchase</button>
+                      : <button type="button" className="btn btn-incomplete" onClick={ this.handleNoSubmit } >Complete Form</button>
                   }
                 </div>
               </div>
