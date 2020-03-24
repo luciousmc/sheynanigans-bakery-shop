@@ -3,52 +3,32 @@ import CartSummaryItem from './cart-summary-item';
 
 function CartSummary({ cartItems, total, addToCart, removeFromCart, removeSingleItem, setView }) {
   const listLen = cartItems.length;
-  let body, totalTxt;
+  const params = {};
 
-  if (listLen === 0) {
-    body = <h3>There are no items in the cart</h3>;
-  } else {
-    const params = {};
+  for (let i = 0; i < listLen; i++) {
+    const product = cartItems[i];
+    const { productId, cartItemId } = product;
 
-    for (let i = 0; i < listLen; i++) {
-      const product = cartItems[i];
-      const { productId, cartItemId } = product;
-
-      if (params[productId]) {
-        params[productId].multiplier += 1;
-        params[productId].ids.push(cartItemId);
-      } else {
-        params[productId] = {
-          multiplier: 1,
-          ids: [cartItemId]
-        };
-      }
+    if (params[productId]) {
+      params[productId].multiplier += 1;
+      params[productId].ids.push(cartItemId);
+    } else {
+      params[productId] = {
+        multiplier: 1,
+        ids: [cartItemId]
+      };
     }
-    // const tester = cartItems.filter((item, index, list) => {
-
-    // });
-    body = (
-      cartItems.map((item, index, list) => {
-        return (
-          <CartSummaryItem
-            params={ params[item.productId] }
-            cartItem={ item }
-            key={ item.cartItemId }
-            addToCart={ addToCart }
-            removeFromCart={ removeFromCart }
-            removeSingleItem={ removeSingleItem }
-          />
-        );
-      })
-    );
-    totalTxt = (
-      <div className="row">
-        <div className="col">
-          <div className="h3 m-3">{ 'Total Cost: $' + (total / 100).toFixed(2) }</div>
-        </div>
-      </div>
-    );
   }
+
+  const renderItems = [];
+
+  cartItems.map(cartItem => {
+    return renderItems.filter(renderItem => {
+      return renderItem.productId === cartItem.productId;
+    }).length > 0
+      ? null
+      : renderItems.push(cartItem);
+  });
 
   return (
     <section className="container w-80 rounded cart-summary-container">
@@ -65,8 +45,27 @@ function CartSummary({ cartItems, total, addToCart, removeFromCart, removeSingle
           <hr/>
         </div>
       </div>
-      { body }
-      { totalTxt }
+      {
+        listLen === 0
+          ? <h3>There are no items in the cart</h3>
+          : renderItems.map(item => {
+            return (
+              <CartSummaryItem
+                params={ params[item.productId] }
+                cartItem={ item }
+                key={ item.cartItemId }
+                addToCart={ addToCart }
+                removeFromCart={ removeFromCart }
+                removeSingleItem={ removeSingleItem }
+              />
+            );
+          })
+      }
+      <div className="row">
+        <div className="col">
+          { listLen > 0 && <div className="h3 m-3">{ 'Total Cost: $' + (total / 100).toFixed(2) }</div> }
+        </div>
+      </div>
       <div className="col text-right p-3">
         <button className="btn btn-dark" onClick={ () => setView('checkout', {})}>Checkout</button>
       </div>
