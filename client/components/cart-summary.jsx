@@ -1,7 +1,7 @@
 import React from 'react';
 import CartSummaryItem from './cart-summary-item';
 
-function CartSummary({ cartItems, total, addToCart, removeFromCart, removeSingleItem, setView }) {
+function CartSummary({ cartItems, total, addToCart, removeFromCart, showConfirmDeleteModal, removeSingleItem, setView }) {
   const listLen = cartItems.length;
   const params = {};
 
@@ -20,15 +20,25 @@ function CartSummary({ cartItems, total, addToCart, removeFromCart, removeSingle
     }
   }
 
-  const renderItems = [];
+  /**
+   * Filters out duplicate cart items
+   * @returns {Object[]}
+   */
+  const filterDuplicates = () => {
+    const output = [];
 
-  cartItems.map(cartItem => {
-    return renderItems.filter(renderItem => {
-      return renderItem.productId === cartItem.productId;
-    }).length > 0
-      ? null
-      : renderItems.push(cartItem);
-  });
+    cartItems.map(cartItem => {
+      return renderItems.filter(renderItem => {
+        return renderItem.productId === cartItem.productId;
+      }).length > 0
+        ? null
+        : output.push(cartItem);
+    });
+
+    return output;
+  };
+
+  const renderItems = filterDuplicates();
 
   return (
     <section className="container w-80 rounded cart-summary-container">
@@ -55,7 +65,7 @@ function CartSummary({ cartItems, total, addToCart, removeFromCart, removeSingle
                 cartItem={ item }
                 key={ item.cartItemId }
                 addToCart={ addToCart }
-                removeFromCart={ removeFromCart }
+                showConfirmDeleteModal={ showConfirmDeleteModal }
                 removeSingleItem={ removeSingleItem }
               />
             );
