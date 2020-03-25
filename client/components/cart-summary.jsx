@@ -1,7 +1,7 @@
 import React from 'react';
 import CartSummaryItem from './cart-summary-item';
 
-function CartSummary({ cartItems, total, addToCart, removeFromCart, showConfirmDeleteModal, removeSingleItem, setView }) {
+function CartSummary({ cartItems, total, addToCart, showConfirmDeleteModal, removeSingleItem, setView }) {
   const listLen = cartItems.length;
 
   /**
