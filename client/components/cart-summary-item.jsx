@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 /** Returns a single Cart Item */
-function CartSummaryItem({ cartItem, addToCart, removeSingleItem, removeFromCart, params }) {
+function CartSummaryItem({ cartItem, addToCart, showConfirmDeleteModal, removeSingleItem, params }) {
   const [quantity, setQuantity] = useState(params.multiplier);
 
   /**
@@ -25,6 +25,11 @@ function CartSummaryItem({ cartItem, addToCart, removeSingleItem, removeFromCart
         setQuantity(quantity - amt);
       }
     }
+  };
+
+  const handleDeleteClick = e => {
+    e.preventDefault();
+    showConfirmDeleteModal(cartItem, quantity);
   };
 
   return (
@@ -52,7 +57,7 @@ function CartSummaryItem({ cartItem, addToCart, removeSingleItem, removeFromCart
         </div>
         <div className="row">
           <div className="col text-right">
-            <div className="d-inline lead text-danger link" onClick={ () => removeFromCart(cartItem.productId) }>
+            <div className="d-inline lead text-danger link" onClick={ handleDeleteClick }>
               Remove from cart
             </div>
           </div>

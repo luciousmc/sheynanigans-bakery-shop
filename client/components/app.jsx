@@ -7,15 +7,17 @@ import CartSummary from './cart-summary';
 import CheckoutForm from './checkout-form';
 import DisclaimerModal from './disclaimer';
 import ItemAddedModal from './item-added-modal';
+import ConfirmDeleteModal from './confirm-delete-modal';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       showItemAddedModal: false,
-      showModal: true,
+      showModal: false,
+      showConfirmDeleteModal: false,
       view: {
-        name: 'catalog',
+        name: 'cart',
         params: {}
       },
       cart: [],
@@ -25,6 +27,8 @@ class App extends Component {
     this.removeModal = this.removeModal.bind(this);
     this.showItemAddedModal = this.showItemAddedModal.bind(this);
     this.hideItemAddedModal = this.hideItemAddedModal.bind(this);
+    this.showConfirmDeleteModal = this.showConfirmDeleteModal.bind(this);
+    this.hideConfirmDeleteModal = this.hideConfirmDeleteModal.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.removeFromCart = this.removeFromCart.bind(this);
     this.removeSingleItem = this.removeSingleItem.bind(this);
@@ -85,6 +89,37 @@ class App extends Component {
    */
   hideItemAddedModal() {
     this.setState({ showItemAddedModal: false });
+  }
+
+  /**
+   * Shows a confirmation modal to verify if user wants to remove an Item from the cart
+   * @typedef {Object} Product Object that holds all the product information
+   * @property {number} productId - Product Id
+   * @property {number} cartItemId - Id of the item in the cart
+   * @property {string} name - The name of the product
+   * @property {number} price - The price of a single item
+   * @property {string} shortDescription - Short description of the product to be displayed on the card
+   * @property {string} longDescription - The full text description of th product to be displayed on details
+   * @param {number} productAmt - The amount of the product currently in the cart
+   */
+  showConfirmDeleteModal(product, productAmt) {
+    this.setState({
+      showConfirmDeleteModal: true,
+      view: {
+        name: 'cart',
+        params: {
+          product,
+          productAmt
+        }
+      }
+    });
+  }
+
+  /**
+   * Hides the modal to verify the user wants to delete an item from the cart
+   */
+  hideConfirmDeleteModal() {
+    this.setState({ showConfirmDeleteModal: false });
   }
 
   /**
@@ -180,7 +215,7 @@ class App extends Component {
   /**
    * Sets the view for the app. Default is 'catalog'.
    * @param {string} name - Name of the view to be displayed
-   * @param {{Object}} params - Object holding aditional parameters for the view
+   * @param {Object} params - Object holding aditional parameters for the view
    */
   setView(name, params) {
     this.setState({ view: { name, params } });
@@ -207,6 +242,7 @@ class App extends Component {
           addToCart={ this.addToCart }
           removeFromCart={ this.removeFromCart }
           removeSingleItem={ this.removeSingleItem }
+          showConfirmDeleteModal={ this.showConfirmDeleteModal }
           total={ this.state.cartTotal }
         />);
     } else {
@@ -220,8 +256,26 @@ class App extends Component {
     }
     return (
       <div className={ 'pb-5 ' + overflow }>
-        { this.state.showItemAddedModal && <ItemAddedModal setView={ this.setView } hideItemAddedModal={this.hideItemAddedModal}/> }
-        { this.state.showModal && <DisclaimerModal firstVisit={ this.state.showModal } removeModal={ this.removeModal } /> }
+        { this.state.showModal &&
+          <DisclaimerModal
+            firstVisit={ this.state.showModal }
+            removeModal={ this.removeModal }
+          />
+        }
+        { this.state.showItemAddedModal &&
+          <ItemAddedModal
+            setView={ this.setView }
+            hideItemAddedModal={this.hideItemAddedModal}
+          />
+        }
+        { this.state.showConfirmDeleteModal &&
+          <ConfirmDeleteModal
+            hideConfirmDeleteModal={ this.hideConfirmDeleteModal }
+            removeFromCart={ this.removeFromCart }
+            productAmt={ this.state.view.params.productAmt }
+            product={ this.state.view.params.product }
+          />
+        }
 
         <Header calcTotal={ this.calcTotal } cartItemAmt={ this.state.cart.length } setView={ this.setView } />
         { renderView }
