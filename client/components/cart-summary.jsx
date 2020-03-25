@@ -3,33 +3,43 @@ import CartSummaryItem from './cart-summary-item';
 
 function CartSummary({ cartItems, total, addToCart, removeFromCart, showConfirmDeleteModal, removeSingleItem, setView }) {
   const listLen = cartItems.length;
-  const params = {};
 
-  for (let i = 0; i < listLen; i++) {
-    const product = cartItems[i];
-    const { productId, cartItemId } = product;
+  /**
+   * Counts the amount of duplicate items there are in the cart and extracts their cart ids
+   * @returns {{multiplier: number, ids: number[]}} Returns an object with item count and and array of their ids
+   */
+  const getItemCountParams = () => {
+    const params = {};
 
-    if (params[productId]) {
-      params[productId].multiplier += 1;
-      params[productId].ids.push(cartItemId);
-    } else {
-      params[productId] = {
-        multiplier: 1,
-        ids: [cartItemId]
-      };
+    for (let i = 0; i < listLen; i++) {
+      const product = cartItems[i];
+      const { productId, cartItemId } = product;
+
+      if (params[productId]) {
+        params[productId].multiplier += 1;
+        params[productId].ids.push(cartItemId);
+      } else {
+        params[productId] = {
+          multiplier: 1,
+          ids: [cartItemId]
+        };
+      }
     }
-  }
+    return params;
+  };
+
+  const params = getItemCountParams();
 
   /**
    * Filters out duplicate cart items
-   * @returns {Object[]}
+   * @returns {Object[]} Returns an array of objects containing product data
    */
   const filterDuplicates = () => {
     const output = [];
 
     cartItems.map(cartItem => {
-      return renderItems.filter(renderItem => {
-        return renderItem.productId === cartItem.productId;
+      return output.filter(outputItem => {
+        return outputItem.productId === cartItem.productId;
       }).length > 0
         ? null
         : output.push(cartItem);
