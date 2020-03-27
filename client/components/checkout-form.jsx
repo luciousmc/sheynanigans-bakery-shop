@@ -320,7 +320,7 @@ class CheckoutForm extends React.Component {
     const { nameError, addressError, cityError, stateError, zipcodeError, creditCardError, cvvError } = this.state;
 
     return (
-      <section className="container w-50 checkout-container">
+      <section className="container w-40 checkout-container">
         <div className="row">
           <div className="col-6">
             <h1>Checkout</h1>
@@ -339,7 +339,7 @@ class CheckoutForm extends React.Component {
 
         <div className="row">
           <div className="col d-flex justify-content-center">
-            <form className="w-75" onSubmit={ this.handleSubmit }>
+            <form onSubmit={ this.handleSubmit }>
               <div className="form-group row">
                 <div className="col">
                   <label htmlFor="name">Full Name:</label>
@@ -496,7 +496,7 @@ class CheckoutForm extends React.Component {
 
         <div className="row">
           <div className="col-12 p-3">
-            <a href="" onClick={ () => this.props.setView('catalog', {}) }>
+            <a href="" onClick={ () => this.props.setView('confirmOrder', {}) }>
               &lt; Continue Shopping
             </a>
           </div>

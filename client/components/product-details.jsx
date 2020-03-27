@@ -21,7 +21,9 @@ class ProductDetails extends React.Component {
 
     if (!product) {
       return (
-        <h1>Loading...</h1>
+        <div className="loading-gif text-center mt-5">
+          <img src="/images/bakery/loader/2.gif" alt="Loading GIF"/>
+        </div>
       );
     } else {
       return (
@@ -38,7 +40,7 @@ class ProductDetails extends React.Component {
               <h3>{ product.name }</h3>
               <p className="lead">{ '$' + (product.price / 100).toFixed(2) }</p>
               <p>{ product.shortDescription }</p>
-              <div onClick={ () => this.props.addToCart(product) } className="btn btn-primary btn-add-to-cart">
+              <div onClick={ () => this.props.addToCart(product) } className="btn btn-add-to-cart">
                 Add to Cart
               </div>
             </div>
