@@ -55,7 +55,8 @@ const OrderConfirmation = ({ setView, customer, orderItems, total }) => {
                 )
               }
               <tr>
-                <th colSpan="2">Purchase Total:</th>
+                <td></td>
+                <th>Purchase Total:</th>
                 <td>${ (total / 100).toFixed(2) }</td>
               </tr>
 
