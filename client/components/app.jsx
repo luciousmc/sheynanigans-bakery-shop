@@ -8,6 +8,7 @@ import CheckoutForm from './checkout-form';
 import DisclaimerModal from './disclaimer';
 import ItemAddedModal from './item-added-modal';
 import ConfirmDeleteModal from './confirm-delete-modal';
+import OrderConfirmation from './order-confirmation';
 
 class App extends Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class App extends Component {
       showModal: false,
       showConfirmDeleteModal: false,
       view: {
-        name: 'cart',
+        name: 'catalog',
         params: {}
       },
       cart: [],
@@ -124,7 +125,7 @@ class App extends Component {
 
   /**
    * Adds a single product to the cart
-   * @param {{Object}} product - Takes an object filled with product data
+   * @param {Product} product Takes an object filled with {@link Product} data
    */
   addToCart(product) {
     const fetchOptions = {
@@ -189,7 +190,7 @@ class App extends Component {
 
   /**
    * Sends a request to the server API to place an order
-   * @param {{Object}} customer - Takes an object filled with customer data
+   * @param {Object} customer - Object filled with customer data
    */
   placeOrder(customer) {
     const fetchOptions = {
@@ -201,11 +202,13 @@ class App extends Component {
     };
 
     fetch('/api/orders', fetchOptions)
-      .then(() => {
+      .then(response => response.json())
+      .then(orderObj => {
+        const orderItems = [...this.state.cart];
         this.setState({
           view: {
-            name: 'catalog',
-            params: {}
+            name: 'confirmOrder',
+            params: { orderObj, orderItems }
           },
           cart: []
         });
@@ -245,11 +248,20 @@ class App extends Component {
           showConfirmDeleteModal={ this.showConfirmDeleteModal }
           total={ this.state.cartTotal }
         />);
-    } else {
+    } else if (this.state.view.name === 'checkout') {
       renderView = (
         <CheckoutForm
           setView={ this.setView }
           placeOrder={ this.placeOrder }
+          total={ this.state.cartTotal }
+        />
+      );
+    } else {
+      renderView = (
+        <OrderConfirmation
+          setView={ this.setView }
+          customer={ this.state.view.params.orderObj }
+          orderItems={ this.state.view.params.orderItems }
           total={ this.state.cartTotal }
         />
       );

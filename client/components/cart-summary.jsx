@@ -1,54 +1,11 @@
 import React from 'react';
 import CartSummaryItem from './cart-summary-item';
+import { useFilterDuplicates, useGetItemCount } from './custom-hooks';
 
 function CartSummary({ cartItems, total, addToCart, showConfirmDeleteModal, removeSingleItem, setView }) {
+  const [params] = useGetItemCount(cartItems);
+  const [renderItems] = useFilterDuplicates(cartItems);
   const listLen = cartItems.length;
-
-  /**
-   * Counts the amount of duplicate items there are in the cart and extracts their cart ids
-   * @returns {{multiplier: number, ids: number[]}} Returns an object with item count and and array of their ids
-   */
-  const getItemCountParams = () => {
-    const params = {};
-
-    for (let i = 0; i < listLen; i++) {
-      const product = cartItems[i];
-      const { productId, cartItemId } = product;
-
-      if (params[productId]) {
-        params[productId].multiplier += 1;
-        params[productId].ids.push(cartItemId);
-      } else {
-        params[productId] = {
-          multiplier: 1,
-          ids: [cartItemId]
-        };
-      }
-    }
-    return params;
-  };
-
-  const params = getItemCountParams();
-
-  /**
-   * Filters out duplicate cart items
-   * @returns {Object[]} Returns an array of objects containing product data
-   */
-  const filterDuplicates = () => {
-    const output = [];
-
-    cartItems.map(cartItem => {
-      return output.filter(outputItem => {
-        return outputItem.productId === cartItem.productId;
-      }).length > 0
-        ? null
-        : output.push(cartItem);
-    });
-
-    return output;
-  };
-
-  const renderItems = filterDuplicates();
 
   return (
     <section className="container w-80 rounded cart-summary-container">
@@ -87,7 +44,7 @@ function CartSummary({ cartItems, total, addToCart, showConfirmDeleteModal, remo
         </div>
       </div>
       <div className="col text-right p-3">
-        <button className="btn btn-dark" onClick={ () => setView('checkout', {})}>Checkout</button>
+        <button className="btn btn-dark" onClick={ () => setView('checkout', { cartInfo: renderItems, params })}>Checkout</button>
       </div>
     </section>
   );

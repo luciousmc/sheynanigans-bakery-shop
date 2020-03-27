@@ -314,7 +314,7 @@ class CheckoutForm extends React.Component {
   }
 
   render() {
-    const { total } = this.props;
+    const { total, cartInfo } = this.props;
     const { isValid } = this.state;
     const { name, addressLine, city, state, zipcode, creditCard, cvv } = this.state;
     const { nameError, addressError, cityError, stateError, zipcodeError, creditCardError, cvvError } = this.state;
@@ -496,7 +496,7 @@ class CheckoutForm extends React.Component {
 
         <div className="row">
           <div className="col-12 p-3">
-            <a href="" onClick={ () => this.props.setView('catalog', {}) }>
+            <a href="" onClick={ () => this.props.setView('confirmOrder', { cartInfo }) }>
               &lt; Continue Shopping
             </a>
           </div>

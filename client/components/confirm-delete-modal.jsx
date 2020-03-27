@@ -1,5 +1,9 @@
 import React from 'react';
 
+/**
+ * Modal Component to confirm if user wants to remove an item from the cart
+ *
+ */
 function ConfirmDeleteModal({ hideConfirmDeleteModal, removeFromCart, product: { name, productId }, productAmt }) {
 
   const handleDeleteItemClick = () => {

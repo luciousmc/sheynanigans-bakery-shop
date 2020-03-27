@@ -84,7 +84,7 @@ span.close-btn {
 }
 
 .header img {
-  max-width: 70%;
+  max-width: 50%;
   cursor: pointer;
 }
 
@@ -168,6 +168,14 @@ input[type="number"]::-webkit-outer-spin-button {
   cursor: context-menu;
 }
 
+/* Order Confirmation */
+.order-confirm-container p {
+  font-size: 1.8rem;
+}
+table {
+  font-size: 1.3rem;
+}
+
 /* Global */
 
 .link:hover {
@@ -175,7 +183,8 @@ input[type="number"]::-webkit-outer-spin-button {
   opacity: .5;
 }
 
-.detail-container, .cart-summary-container, .card-item, .checkout-container {
+.detail-container, .cart-summary-container,
+.card-item, .checkout-container, .order-confirm-container {
   background-color: whitesmoke;
   border: 3px solid var(--pink);
   box-shadow: 1px 1px 10px gray;
