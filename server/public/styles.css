@@ -105,6 +105,9 @@ span.close-btn {
   height: 180px;
   object-fit: cover;
 }
+.card img:hover, .card-title:hover {
+  cursor:pointer;
+}
 
 .btn-details {
   background-color: cadetblue;

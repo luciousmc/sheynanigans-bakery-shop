@@ -44,7 +44,7 @@ function CartSummary({ cartItems, total, addToCart, showConfirmDeleteModal, remo
         </div>
       </div>
       <div className="col text-right p-3">
-        <button className="btn btn-dark" onClick={ () => setView('checkout', { cartInfo: renderItems, params })}>Checkout</button>
+        <button className="btn btn-dark" onClick={ () => setView('checkout', {})}>Checkout</button>
       </div>
     </section>
   );
