@@ -112,7 +112,9 @@ span.close-btn {
 }
 
 /* View details  */
-
+.detail-container {
+  font-size: 1.3rem;
+}
 .product-detail-img {
   text-align: center;
 }
@@ -188,4 +190,12 @@ table {
   background-color: whitesmoke;
   border: 3px solid var(--pink);
   box-shadow: 1px 1px 10px gray;
+}
+
+.w-40 {
+  width: 40%;
+}
+
+.w-80 {
+  width: 80%;
 }

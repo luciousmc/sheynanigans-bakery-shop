@@ -204,13 +204,19 @@ class App extends Component {
     fetch('/api/orders', fetchOptions)
       .then(response => response.json())
       .then(orderObj => {
-        const orderItems = [...this.state.cart];
-        this.setState({
-          view: {
-            name: 'confirmOrder',
-            params: { orderObj, orderItems }
-          },
-          cart: []
+        this.setState(prevState => {
+          const newState = {
+            view: {
+              name: 'confirmOrder',
+              params: {
+                orderObj,
+                orderItems: prevState.cart,
+                cartTotal: prevState.cartTotal
+              }
+            },
+            cart: []
+          };
+          return newState;
         });
       });
   }
@@ -262,7 +268,7 @@ class App extends Component {
           setView={ this.setView }
           customer={ this.state.view.params.orderObj }
           orderItems={ this.state.view.params.orderItems }
-          total={ this.state.cartTotal }
+          total={ this.state.view.params.cartTotal }
         />
       );
     }
