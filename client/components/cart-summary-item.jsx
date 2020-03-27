@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 /** Returns a single Cart Item */
-function CartSummaryItem({ cartItem, addToCart, showConfirmDeleteModal, removeSingleItem, params }) {
+function CartSummaryItem({ cartItem, addToCart, setView, showConfirmDeleteModal, removeSingleItem, params }) {
   const [quantity, setQuantity] = useState(params.multiplier);
 
   /**
@@ -35,11 +35,20 @@ function CartSummaryItem({ cartItem, addToCart, showConfirmDeleteModal, removeSi
   return (
     <div className="row cart-item border border-secondary rounded p-3 mb-2 w-75 mx-auto">
       <div className="col-3">
-        <img className="cart-img" src={ cartItem.image } alt=""/>
+        <img className="cart-img"
+          onClick={ () => setView('details', { productId: cartItem.productId }) }
+          src={ cartItem.image }
+          alt="Item Image"
+        />
       </div>
       <div className="col-9">
         <div className="row">
-          <h5>{ cartItem.name }</h5>
+          <h5
+            onClick={ () => setView('details', { productId: cartItem.productId }) }
+            className="cart-title"
+          >
+            { cartItem.name }
+          </h5>
         </div>
         <div className="row">
           <div className="col">

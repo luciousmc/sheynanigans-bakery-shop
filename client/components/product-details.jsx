@@ -21,7 +21,9 @@ class ProductDetails extends React.Component {
 
     if (!product) {
       return (
-        <h1>Loading...</h1>
+        <div className="loading-gif text-center mt-5">
+          <img src="/images/bakery/loader/2.gif" alt="Loading GIF"/>
+        </div>
       );
     } else {
       return (

@@ -107,6 +107,7 @@ span.close-btn {
 }
 .card img:hover, .card-title:hover {
   cursor:pointer;
+  opacity: .7;
 }
 
 .btn-details {
@@ -140,6 +141,11 @@ span.close-btn {
   max-width: 100%;
   height: 150px;
   object-fit: cover;
+}
+
+.cart-item img:hover, .cart-item h5:hover {
+  cursor:pointer;
+  opacity: .7;
 }
 
 #qty {

@@ -30,6 +30,7 @@ function CartSummary({ cartItems, total, addToCart, showConfirmDeleteModal, remo
               <CartSummaryItem
                 params={ params[item.productId] }
                 cartItem={ item }
+                setView={ setView }
                 key={ item.cartItemId }
                 addToCart={ addToCart }
                 showConfirmDeleteModal={ showConfirmDeleteModal }
