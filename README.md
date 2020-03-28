@@ -8,9 +8,8 @@ Shenanigans Bakery™ is a full stack shopping cart demo app using React.js/Node
 
 ![GIF Image](doc/demo.gif)
 
-- Fully working content management system(CMS)
+- Content management system(CMS) using PostgreSQL as the database
 - Front end coded with React with Bootstrap
-- Back end programmed with Node.js using express session and PostgreSQL for the database
 - User can add and remove items form the cart
 - User can "Purchase" items (No processing is done).
 
