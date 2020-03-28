@@ -324,10 +324,12 @@ class CheckoutForm extends React.Component {
         <div className="row">
           <div className="col-6">
             <h1>Checkout</h1>
-            <small>This site is for demonstration only. Do not enter any personal information.git</small>
           </div>
           <div className="col-6">
             <p className="lead mb-0 text-right p-3">{ 'Total Cost: $' + (total / 100).toFixed(2) }</p>
+          </div>
+          <div className="col-12">
+            <small className="d-block text-center">This site is for demonstration only. Do not enter any personal information.</small>
           </div>
           <hr/>
         </div>

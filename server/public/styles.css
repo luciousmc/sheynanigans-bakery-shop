@@ -160,6 +160,9 @@ input[type="number"]::-webkit-outer-spin-button {
 
 /* Checkout */
 
+.checkout-container small {
+  color: var(--pink); 
+}
 #name-error, #address-error, #city-error, #state-error, #zipcode-error, #credit-card-error, #cvv-error {
   visibility: hidden;
   color: red;
