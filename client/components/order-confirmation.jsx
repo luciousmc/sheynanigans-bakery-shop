@@ -72,7 +72,7 @@ const OrderConfirmation = ({ setView, customer, orderItems, total }) => {
       </div>
       <div className="row customer-info">
         <div className="col">
-          <table className="table-sm w-50">
+          <table className="table-sm">
             <tbody>
               <tr>
                 <th scope="row">Name:</th>
