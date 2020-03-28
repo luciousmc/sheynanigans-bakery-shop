@@ -57,7 +57,14 @@ function CartSummaryItem({ cartItem, addToCart, setView, showConfirmDeleteModal,
           <div className="col">
             <div className="form-group text-right">
               <label htmlFor="qty">Qty:</label>
-              <input type="number" id="qty" name="quantity" value={ quantity } onChange={ onQtyChange } />
+              <select name="quantity" id="qty" value={ quantity } onChange={ onQtyChange }>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
             </div>
           </div>
         </div>

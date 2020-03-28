@@ -329,7 +329,7 @@ class CheckoutForm extends React.Component {
             <p className="lead mb-0 text-right p-3">{ 'Total Cost: $' + (total / 100).toFixed(2) }</p>
           </div>
           <div className="col-12">
-            <small className="d-block text-center">This site is for demonstration only. Do not enter any personal information.</small>
+            <span className="d-block text-center">This site is for demonstration only. Do not enter any personal information.</span>
           </div>
           <hr/>
         </div>

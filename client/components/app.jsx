@@ -15,7 +15,7 @@ class App extends Component {
     super(props);
     this.state = {
       showItemAddedModal: false,
-      showModal: false,
+      showModal: true,
       showConfirmDeleteModal: false,
       view: {
         name: 'catalog',

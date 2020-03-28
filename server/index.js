@@ -13,12 +13,6 @@ app.use(sessionMiddleware);
 
 app.use(express.json());
 
-app.get('/api/health-check', (req, res, next) => {
-  db.query('select \'successfully connected\' as "message"')
-    .then(result => res.json(result.rows[0]))
-    .catch(err => next(err));
-});
-
 // GET cart
 app.get('/api/cart', (req, res, next) => {
   if (!req.session.cartId) {
