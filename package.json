@@ -1,7 +1,7 @@
 {
-  "name": "wicked-sales-js-solution",
+  "name": "sheynanigans-bakery-shop",
   "version": "1.0.0",
-  "description": "Reference implemenation of a Node.js &amp; React shopping cart app.",
+  "description": "Fulls stack React and Node.js shopping cart.",
   "main": "server/index.js",
   "scripts": {
     "dev": "npm-run-all --silent --parallel dev:*",

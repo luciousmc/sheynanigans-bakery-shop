@@ -4,7 +4,7 @@
 
 ## Overview
 
-Shenanigans Bakery™ is a full stack shopping cart demo app using React.js/Node.js
+Shenanigans Bakery™ is a full stack shopping cart app using React.js/Node.js
 
 ![GIF Image](doc/demo.gif)
 
