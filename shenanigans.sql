@@ -1,5 +1,0 @@
-INSERT INTO "products" ("name", "price", "image", "shortDescription", "longDescription")
-VALUES  ('Blueberry Cheesecake Muffins', 2000, '/images/bakery/blueberry-cheesecake-muffins.png', 'Box of 12. Not too sweet. Just enough to satisfy that sweet craving', 'Fresh blueberries mixed into our proprietary mix of cream cheese and sugar with a little secret ingredient to create the perfect balance between sweet and moist'),
-        ('Cupcakes', 1199, '/images/bakery/cupcake.jpg', 'Box of 15. Pick from chocolate, vanilla, red velvet, carrot, pumpkin and blueberry', 'Made to order. Fully customizable. Our frostings include buttercrem, cream cheese, chocolate and strawberry.'),
-        ('Milk Tea', 695, '/images/bakery/milk-tea.jpg', 'In store only. Classic milk tea', 'Add-ons include tapioca pearls, taro balls, mango jelly and egg pudding'),
-        ('Green Tea Cheese Foam', 799, '/images/bakery/green-tea-cheese-foam.JPG', 'In store only. Organic green tea topped with a sweet cheese foam', 'Add-ons include tapioca pearls, taro balls, mango jelly and egg pudding');
