@@ -49,6 +49,10 @@ body::after {
   max-width: 550px;
 }
 
+.item-added-box {
+  max-width: 315px;
+}
+
 .confirm-delete-box {
   width: 30%;
 }
@@ -217,7 +221,9 @@ table {
 }
 
 /* Media Queries */
+
 @media screen and (max-width: 529px) {
+  /* Modals */
   .modal-box {
     width: 85%;
   }
@@ -227,11 +233,21 @@ table {
   .modal-box button {
     width: 50% !important;
   }
+
+  .item-added-box i {
+    display: none;
+  }
+  
 }
 
 @media screen and (max-width: 1000px) {
+  /* Modals */
   .modal-box {
     width: 75%;
     text-align: center;
+  }
+
+  .item-added-box {
+    width: 70%;
   }
 }
