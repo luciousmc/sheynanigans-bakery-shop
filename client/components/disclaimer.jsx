@@ -5,8 +5,8 @@ function DisclaimerModal(props) {
     <section className="modal-screen d-flex justify-content-center align-items-center p-0">
       <div className="modal-box p-4">
         <div className="row">
-          <div className="col d-flex justify-content-between">
-            <p className="display-4">Disclaimer</p>
+          <div className="col d-flex justify-content-center">
+            <h4 className="display-4">Disclaimer</h4>
           </div>
         </div>
         <div className="row">

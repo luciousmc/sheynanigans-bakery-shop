@@ -45,7 +45,8 @@ body::after {
   border: 5px solid black;
 }
 .modal-box {
-  width: 50%
+  width: 50%;
+  max-width: 550px;
 }
 
 .confirm-delete-box {
@@ -213,4 +214,24 @@ table {
 
 .w-80 {
   width: 80%;
+}
+
+/* Media Queries */
+@media screen and (max-width: 529px) {
+  .modal-box {
+    width: 85%;
+  }
+  .modal-box p {
+    font-size: 1.1rem;
+  }
+  .modal-box button {
+    width: 50% !important;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .modal-box {
+    width: 75%;
+    text-align: center;
+  }
 }
