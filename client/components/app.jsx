@@ -14,11 +14,11 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showItemAddedModal: true,
+      showItemAddedModal: false,
       showModal: false,
       showConfirmDeleteModal: false,
       view: {
-        name: 'details',
+        name: 'cart',
         params: {}
       },
       cart: [],

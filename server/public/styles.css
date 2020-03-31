@@ -237,6 +237,10 @@ table {
   .item-added-box i {
     display: none;
   }
+
+  .confirm-delete-box {
+    width: 75%;
+  }
   
 }
 
