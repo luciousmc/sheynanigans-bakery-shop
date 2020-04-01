@@ -10,11 +10,11 @@ function Header({ cartItemAmt, setView, calcTotal }) {
   return (
     <header className="header container-fluid mb-2">
       <div className="row">
-        <div className="col-4"></div>
-        <div className="col-4 d-flex justify-content-center">
+        <div className="col-3 spacer"></div>
+        <div className="col-6 d-flex justify-content-center logo-container">
           <img className="p-2 m-2" src="/images/logo_pink.png" alt="Logo" onClick={ () => setView('catalog', {}) }/>
         </div>
-        <div className="col-4">
+        <div className="col-3 cart-count-container">
           <p
             onClick={ () => setView('cart', {}) }
             className="cart-count text-white text-right p-3 ml-auto">

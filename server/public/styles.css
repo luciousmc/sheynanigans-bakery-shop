@@ -244,6 +244,17 @@ table {
   
 }
 
+@media screen and (max-width: 700px) {
+
+  /* Header */
+  p.cart-count {
+    position: fixed;
+    right: 0;
+    font-size: .9rem;
+    z-index: 3;
+  }
+}
+
 @media screen and (max-width: 1000px) {
   /* Modals */
   .modal-box {
@@ -255,14 +266,24 @@ table {
     width: 70%;
   }
 
+  /* Header */
+  .header img {
+    max-width: 80%;
+    margin: 0 !important;
+    padding: 10px 0 0 0 !important;
+  }
+
   /* Catalog View */
 
   .card-item {
-    width: 18rem !important;
+    width: 16rem !important;
+  }
+
+  .card-item h5, .card-item p {
+    text-align: center;
   }
 
   .card-item p {
-    text-align: center;
     font-weight: bold;
   }
 
