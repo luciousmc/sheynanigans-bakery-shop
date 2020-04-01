@@ -23,7 +23,11 @@ function ConfirmDeleteModal({ hideConfirmDeleteModal, removeFromCart, product: {
 
         <div className="row">
           <div className="col">
-            <h5 className="lead">{ `Do you want to remove ${productAmt} "${name}" from the cart?` }</h5>
+            <p
+              className="lead text-center text-sm-left"
+            >
+              { `Do you want to remove ${productAmt} "${name}" from the cart?` }
+            </p>
           </div>
         </div>
 

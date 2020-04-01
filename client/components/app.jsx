@@ -231,8 +231,11 @@ class App extends Component {
   }
 
   render() {
+    const { showModal, showConfirmDeleteModal, showItemAddedModal } = this.state;
     let renderView;
-    const overflow = this.state.showModal ? 'no-scroll' : 'scroll';
+    const overflow = showModal || showConfirmDeleteModal || showItemAddedModal
+      ? 'no-scroll'
+      : 'scroll';
 
     if (this.state.view.name === 'catalog') {
       renderView = <ProductList setView={ this.setView } />;
@@ -274,19 +277,19 @@ class App extends Component {
     }
     return (
       <div className={ 'pb-5 ' + overflow }>
-        { this.state.showModal &&
+        { showModal &&
           <DisclaimerModal
-            firstVisit={ this.state.showModal }
+            firstVisit={ showModal }
             removeModal={ this.removeModal }
           />
         }
-        { this.state.showItemAddedModal &&
+        { showItemAddedModal &&
           <ItemAddedModal
             setView={ this.setView }
             hideItemAddedModal={this.hideItemAddedModal}
           />
         }
-        { this.state.showConfirmDeleteModal &&
+        { showConfirmDeleteModal &&
           <ConfirmDeleteModal
             hideConfirmDeleteModal={ this.hideConfirmDeleteModal }
             removeFromCart={ this.removeFromCart }
