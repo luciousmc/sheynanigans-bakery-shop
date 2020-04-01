@@ -85,7 +85,7 @@ span.close-btn {
 }
 
 .header img {
-  max-width: 50%;
+  max-width: 275px;
   cursor: pointer;
 }
 
@@ -96,8 +96,20 @@ span.close-btn {
   cursor: pointer;
 }
 
-.cart-count span {
+.cart-count span.icon {
+  position: relative;
   text-shadow: 1px 1px 5px black;
+}
+span.icon span {
+  position: absolute;
+  top: 10%;
+  left: 35%;
+  transform: translateY(-50%);
+  text-shadow: none;
+  font-size:1.4rem;
+}
+span.icon i {
+  font-size: 2.5rem;
 }
 
 /* Catalog View */
@@ -252,13 +264,13 @@ table {
 @media screen and (max-width: 700px) {
 
   /* Header */
-  p.cart-count {
+  /* p.cart-count {
     position: fixed;
     right: 0;
     font-size: .9rem;
     z-index: 3;
   }
-}
+} */
 
 @media screen and (max-width: 1000px) {
   /* Modals */

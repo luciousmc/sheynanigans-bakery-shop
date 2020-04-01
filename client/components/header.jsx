@@ -9,23 +9,21 @@ function Header({ cartItemAmt, setView, calcTotal }) {
 
   return (
     <header className="header container-fluid mb-2">
-      <div className="row">
+      <div className="row no-gutters">
         <div className="col-3 spacer"></div>
         <div className="col-6 d-flex justify-content-center logo-container">
           <img className="p-2 m-2" src="/images/logo_pink.png" alt="Logo" onClick={ () => setView('catalog', {}) }/>
         </div>
-        <div className="col-3 cart-count-container">
+        <div className="col-3 cart-count-container text-right">
           <p
             onClick={ () => setView('cart', {}) }
-            className="cart-count text-white text-right p-3 ml-auto">
-            {
-              cartItemAmt + (
-                cartItemAmt === 1
-                  ? ' item'
-                  : ' items'
-              )
-            }
-            <span className="icon"><i className="fas fa-shopping-cart fa-2x"></i></span>
+            className="cart-count text-white text-right ml-auto">
+            <span className="icon">
+              <span className="badge text-info">
+                { cartItemAmt }
+              </span>
+              <i className="fas fa-shopping-cart p-3"></i>
+            </span>
           </p>
         </div>
       </div>
