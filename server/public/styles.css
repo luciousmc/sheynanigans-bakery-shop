@@ -335,6 +335,14 @@ table {
 
   /* Checkout Form */
   .checkout-container {
+    width: 95%;
+  }
+
+  /* Order Confirmation */
+  .order-confirm-container {
     width: 90%;
+  }
+  .order-confirm-container p {
+    font-size: 1rem;
   }
 }
