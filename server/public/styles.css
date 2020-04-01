@@ -102,14 +102,14 @@ span.close-btn {
 }
 span.icon span {
   position: absolute;
-  top: 10%;
-  left: 35%;
+  top: 0;
+  left: 40%;
   transform: translateY(-50%);
   text-shadow: none;
-  font-size:1.4rem;
+  font-size:1.5rem;
 }
 span.icon i {
-  font-size: 2.5rem;
+  font-size: 3.3rem;
 }
 
 /* Catalog View */
@@ -258,7 +258,21 @@ table {
   .confirm-delete-box {
     width: 85% !important;
   }
-  
+}
+
+@media screen and (max-width: 700px) {
+  /* Header */
+  span.icon span {
+    position: absolute;
+    top: 10%;
+    left: 35%;
+    transform: translateY(-50%);
+    text-shadow: none;
+    font-size:1.4rem;
+  }
+  span.icon i {
+    font-size: 2.5rem;
+  }
 }
 
 @media screen and (max-width: 1000px) {
