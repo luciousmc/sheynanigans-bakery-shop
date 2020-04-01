@@ -189,6 +189,9 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 /* Order Confirmation */
+.order-confirm-container {
+  max-width: 720px;
+}
 .order-confirm-container p {
   font-size: 1.8rem;
 }
