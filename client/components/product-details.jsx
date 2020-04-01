@@ -34,9 +34,9 @@ class ProductDetails extends React.Component {
             </div>
           </div>
           <div className="row mb-5">
-            <div className="col-5 product-detail-img" style={{ background: `url(${product.image}) no-repeat center/85%` }}>
+            <div className="col-12 col-sm-5 product-detail-img" style={{ background: `url(${product.image}) no-repeat center/85%` }}>
             </div>
-            <div className="col-7">
+            <div className="col-12 col-sm-7">
               <h3>{ product.name }</h3>
               <p className="lead">{ '$' + (product.price / 100).toFixed(2) }</p>
               <p>{ product.shortDescription }</p>
@@ -46,7 +46,7 @@ class ProductDetails extends React.Component {
             </div>
           </div>
           <div className="row">
-            <div className="col-12">
+            <div className="col d-none d-sm-block">
               <p className="p-3">{ product.longDescription }</p>
             </div>
           </div>

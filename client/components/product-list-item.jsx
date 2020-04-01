@@ -17,7 +17,7 @@ function ProductListItem(props) {
           >
             { props.product.name }
           </h5>
-          <p className="card-text lead">{ '$' + (props.product.price / 100).toFixed(2) }</p>
+          <p className="card-text d-none d-sm-block lead">{ '$' + (props.product.price / 100).toFixed(2) }</p>
           <p className="card-text">{ props.product.shortDescription }</p>
           <button
             className="btn btn-details btn-block mx-auto"

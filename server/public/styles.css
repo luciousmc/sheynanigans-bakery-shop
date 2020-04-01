@@ -278,16 +278,33 @@ table {
   .card-item {
     width: 16rem !important;
   }
-
   .card-item h5, .card-item p {
     text-align: center;
   }
-
-  .card-item p {
-    font-weight: bold;
-  }
-
   .card-item p:last-of-type {
     display: none;
+  }
+
+  /* Product Detail View */
+  .detail-container {
+    width: 90% !important;
+    text-align: center;
+    margin-top: 2rem;
+  }
+  .product-detail-img {
+    height: 8rem;
+  }
+  .detail-container h3 {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+  }
+  .detail-container p:first-of-type {
+    font-size: 1.5rem;
+  }
+  .detail-container p:last-of-type {
+    font-size: 1rem;
+  }
+  .btn-add-to-cart {
+    width: 80%;
   }
 }
