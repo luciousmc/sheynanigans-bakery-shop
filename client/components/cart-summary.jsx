@@ -41,7 +41,12 @@ function CartSummary({ cartItems, total, addToCart, showConfirmDeleteModal, remo
       }
       <div className="row">
         <div className="col">
-          { listLen > 0 && <div className="cart-total h3 m-3">{ 'Total Cost: $' + (total / 100).toFixed(2) }</div> }
+          {
+            listLen > 0 &&
+              <h3 className="cart-total m-3 text-center text-sm-left">
+                { 'Total Cost: $' + (total / 100).toFixed(2) }
+              </h3>
+          }
         </div>
       </div>
       <div className="col text-center text-sm-right p-3">
