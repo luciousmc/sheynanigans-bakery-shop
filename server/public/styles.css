@@ -164,7 +164,9 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 /* Checkout */
-
+.checkout-container {
+  max-width: 550px;
+}
 .checkout-container span {
   color: var(--pink); 
 }
@@ -329,5 +331,10 @@ table {
   }
   .checkout-button {
     width: 50%;
+  }
+
+  /* Checkout Form */
+  .checkout-container {
+    width: 90%;
   }
 }

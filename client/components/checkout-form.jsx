@@ -320,13 +320,21 @@ class CheckoutForm extends React.Component {
     const { nameError, addressError, cityError, stateError, zipcodeError, creditCardError, cvvError } = this.state;
 
     return (
-      <section className="container w-40 checkout-container">
+      <section className="container checkout-container">
         <div className="row">
-          <div className="col-6">
-            <h1>Checkout</h1>
+          <div className="col-12 p-3">
+            <div className="lead text-primary text-center text-sm-left link" onClick={ () => this.props.setView('cart', {}) }>
+              &lt; Back to Cart
+            </div>
           </div>
-          <div className="col-6">
-            <p className="lead mb-0 text-right p-3">{ 'Total Cost: $' + (total / 100).toFixed(2) }</p>
+        </div>
+
+        <div className="row">
+          <div className="col-12 col-sm-6">
+            <h1 className="text-center text-sm-left">Checkout</h1>
+          </div>
+          <div className="col-12 col-sm-6">
+            <p className="lead mb-0 text-center text-sm-right p-3">{ 'Total Cost: $' + (total / 100).toFixed(2) }</p>
           </div>
           <div className="col-12">
             <span className="d-block text-center">This site is for demonstration only. Do not enter any personal information.</span>
@@ -384,7 +392,7 @@ class CheckoutForm extends React.Component {
               </div>
 
               <div className="form-group row">
-                <div className="col-6">
+                <div className="col-12 col-sm-6">
                   <div className="city">
                     <label htmlFor="city">City:</label>
                     <input
@@ -403,7 +411,7 @@ class CheckoutForm extends React.Component {
                   </div>
                 </div>
 
-                <div className="form-group col-2">
+                <div className="form-group col-4 col-sm-2">
                   <div className="state">
                     <label htmlFor="state">State:</label>
                     <input
@@ -422,7 +430,7 @@ class CheckoutForm extends React.Component {
                   </div>
                 </div>
 
-                <div className="form-group col-4">
+                <div className="form-group col-8 col-sm-4">
                   <div className="zipcode">
                     <label htmlFor="zipcode">Zip:</label>
                     <input
@@ -443,7 +451,7 @@ class CheckoutForm extends React.Component {
               </div>
 
               <div className="row">
-                <div className="col">
+                <div className="col-12 col-sm-9">
                   <div className="form-group">
                     <label htmlFor="creditCard">Credit Card Number:</label>
                     <input
@@ -463,7 +471,7 @@ class CheckoutForm extends React.Component {
                   </div>
                 </div>
 
-                <div className="col-3">
+                <div className="col-12 col-sm-3">
                   <div className="form-group">
                     <label htmlFor="cvv">CVV:</label>
                     <input
@@ -485,23 +493,15 @@ class CheckoutForm extends React.Component {
               </div>
 
               <div className="row">
-                <div className="col">
+                <div className="col text-center text-sm-right">
                   {
                     isValid
-                      ? <button type="submit" className="btn btn-complete">Purchase</button>
-                      : <button type="button" className="btn btn-incomplete" onClick={ this.handleNoSubmit } >Complete Form</button>
+                      ? <button type="submit" className="btn btn-complete mb-3">Purchase</button>
+                      : <button type="button" className="btn btn-incomplete mb-3" onClick={ this.handleNoSubmit } >Complete Form</button>
                   }
                 </div>
               </div>
             </form>
-          </div>
-        </div>
-
-        <div className="row">
-          <div className="col-12 p-3">
-            <a href="" onClick={ () => this.props.setView('confirmOrder', {}) }>
-              &lt; Continue Shopping
-            </a>
           </div>
         </div>
       </section>
