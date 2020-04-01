@@ -3,7 +3,7 @@ import React from 'react';
 function ProductListItem(props) {
   return (
     <div className="col">
-      <div className="card mt-3 card-item" style={ { width: '20rem' } }>
+      <div className="card mt-3 mx-auto card-item" style={ { width: '20rem' } }>
         <img
           className="card-img-top card-image"
           src={ props.product.image }

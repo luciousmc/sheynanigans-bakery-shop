@@ -254,4 +254,19 @@ table {
   .item-added-box {
     width: 70%;
   }
+
+  /* Catalog View */
+
+  .card-item {
+    width: 18rem !important;
+  }
+
+  .card-item p {
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .card-item p:last-of-type {
+    display: none;
+  }
 }
