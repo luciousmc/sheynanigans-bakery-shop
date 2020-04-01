@@ -18,8 +18,8 @@ class App extends Component {
       showModal: false,
       showConfirmDeleteModal: false,
       view: {
-        name: 'details',
-        params: { productId: 1 }
+        name: 'cart',
+        params: {}
       },
       cart: [],
       cartTotal: 0

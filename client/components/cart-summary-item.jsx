@@ -34,23 +34,24 @@ function CartSummaryItem({ cartItem, addToCart, setView, showConfirmDeleteModal,
 
   return (
     <div className="row cart-item border border-secondary rounded p-3 mb-2 w-75 mx-auto">
-      <div className="col-3">
-        <img className="cart-img"
+      <div className="col-12 col-sm-3 cart-image-container">
+        <img
+          className="cart-img"
           onClick={ () => setView('details', { productId: cartItem.productId }) }
           src={ cartItem.image }
           alt="Item Image"
         />
       </div>
-      <div className="col-9">
+      <div className="col-12 col-sm-9">
         <div className="row">
           <h5
             onClick={ () => setView('details', { productId: cartItem.productId }) }
-            className="cart-title"
+            className="cart-title text-center text-sm-left"
           >
             { cartItem.name }
           </h5>
         </div>
-        <div className="row">
+        <div className="row no-gutters">
           <div className="col">
             <p className="lead">{ '$' + (cartItem.price * params.multiplier / 100).toFixed(2) }</p>
           </div>
@@ -68,12 +69,12 @@ function CartSummaryItem({ cartItem, addToCart, setView, showConfirmDeleteModal,
             </div>
           </div>
         </div>
-        <div className="row">
+        <div className="row d-none d-sm-block">
           <p>{ cartItem.shortDescription }</p>
         </div>
         <div className="row">
-          <div className="col text-right">
-            <div className="d-inline lead text-danger link" onClick={ handleDeleteClick }>
+          <div className="col text-center text-sm-right">
+            <div className="delete-button d-inline lead text-danger link" onClick={ handleDeleteClick }>
               Remove from cart
             </div>
           </div>

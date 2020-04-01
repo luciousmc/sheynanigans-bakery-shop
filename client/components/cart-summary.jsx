@@ -10,15 +10,15 @@ function CartSummary({ cartItems, total, addToCart, showConfirmDeleteModal, remo
   return (
     <section className="container w-80 rounded cart-summary-container">
       <div className="row">
-        <div className="col-12">
-          <div onClick={ () => setView('catalog', {}) } className="d-inline lead text-primary link">
+        <div className="col">
+          <div onClick={ () => setView('catalog', {}) } className="lead text-primary text-center text-sm-left link">
             &lt; Back to Catalog
           </div>
         </div>
       </div>
       <div className="row">
-        <div className="col-12">
-          <h1>My Cart</h1>
+        <div className="col">
+          <h1 className="text-center text-sm-left">My Cart</h1>
           <hr/>
         </div>
       </div>
@@ -41,11 +41,11 @@ function CartSummary({ cartItems, total, addToCart, showConfirmDeleteModal, remo
       }
       <div className="row">
         <div className="col">
-          { listLen > 0 && <div className="h3 m-3">{ 'Total Cost: $' + (total / 100).toFixed(2) }</div> }
+          { listLen > 0 && <div className="cart-total h3 m-3">{ 'Total Cost: $' + (total / 100).toFixed(2) }</div> }
         </div>
       </div>
-      <div className="col text-right p-3">
-        <button className="btn btn-dark" onClick={ () => setView('checkout', {})}>Checkout</button>
+      <div className="col text-center text-sm-right p-3">
+        <button className="checkout-button btn btn-dark" onClick={ () => setView('checkout', {})}>Checkout</button>
       </div>
     </section>
   );

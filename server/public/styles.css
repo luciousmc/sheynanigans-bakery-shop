@@ -307,4 +307,27 @@ table {
   .btn-add-to-cart {
     width: 80%;
   }
+
+  /* Cart Summary */
+  .cart-summary-container {
+    width: 90%;
+  }
+  .cart-item {
+    width: 95% !important;
+  }
+  .cart-image-container {
+    text-align: center;
+  }
+  .cart-item img {
+    height: 100px;
+  }
+  .cart-title {
+    padding: 10px 0;
+  }
+  .cart-total {
+    font-size: 1.5rem;
+  }
+  .checkout-button {
+    width: 50%;
+  }
 }
