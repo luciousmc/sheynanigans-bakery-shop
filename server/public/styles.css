@@ -86,6 +86,8 @@ span.close-btn {
 
 .header img {
   max-width: 275px;
+  max-height: 275px;
+  object-fit: contain;
   cursor: pointer;
 }
 
@@ -288,7 +290,7 @@ table {
 
   /* Header */
   .header img {
-    max-width: 80%;
+    width: 80%;
     margin: 0 !important;
     padding: 10px 0 0 0 !important;
   }
