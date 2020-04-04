@@ -322,8 +322,8 @@ class CheckoutForm extends React.Component {
     return (
       <section className="container checkout-container">
         <div className="row">
-          <div className="col-12 p-3">
-            <div className="lead text-primary text-center text-sm-left link" onClick={ () => this.props.setView('cart', {}) }>
+          <div className="col-12 p-3 text-center text-sm-left">
+            <div className="d-inline lead font-weight-bold text-primary link" onClick={ () => this.props.setView('cart', {}) }>
               &lt; Back to Cart
             </div>
           </div>
