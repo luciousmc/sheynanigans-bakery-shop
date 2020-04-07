@@ -57,6 +57,10 @@ body::after {
   width: 30%;
 }
 
+.confirm-delete-box h3 {
+  text-shadow: 1px 1px 5px var(--purple);
+}
+
 span.close-btn {
   font-size: 3rem;
 }
