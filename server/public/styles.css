@@ -58,7 +58,7 @@ body::after {
 }
 
 .confirm-delete-box h3 {
-  text-shadow: 1px 1px 5px var(--purple);
+  text-shadow: 1px 1px 1px var(--purple);
 }
 
 span.close-btn {
