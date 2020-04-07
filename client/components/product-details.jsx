@@ -30,7 +30,7 @@ class ProductDetails extends React.Component {
         <section className="container mb-3 w-75 rounded detail-container">
           <div className="row">
             <div className="col-12 p-3">
-              <div className="d-inline lead text-primary link" onClick={ () => this.props.setView('catalog', {}) }>&lt; Return to Catalog</div>
+              <div className="d-inline lead font-weight-bold text-primary link" onClick={ () => this.props.setView('catalog', {}) }>&lt; Return to Catalog</div>
             </div>
           </div>
           <div className="row mb-5">

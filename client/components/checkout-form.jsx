@@ -22,112 +22,9 @@ class CheckoutForm extends React.Component {
       isValid: false
     };
     this.handleChange = this.handleChange.bind(this);
-    this.validateFields = this.validateFields.bind(this);
     this.showErrors = this.showErrors.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleNoSubmit = this.handleNoSubmit.bind(this);
-  }
-
-  validateFields(e) {
-    // Create local variables from the target object
-    const { value, name } = e.target;
-    // Create local variables from the state for err messages
-    const { nameError, addressError, cityError, stateError, zipcodeError, creditCardError, cvvError } = this.state;
-
-    if (!nameError && !addressError && !cityError && !stateError && !zipcodeError && !creditCardError && !cvvError) {
-      this.setState({ isValid: true });
-    }
-
-    switch (name) {
-      case 'name':
-        // Make the error element visible
-        document.getElementById('name-error').style.visibility = 'visible';
-
-        // Name is required
-        if (!value) {
-          this.setState({ nameError: 'Name is required' });
-
-        // Name must be at least 5 characters
-        } else if (value.length < 5) {
-          this.setState({ nameError: 'Please enter at least 5 characters' });
-
-          // If all conditions pass, remove any err messages if there are any
-        } else {
-          this.setState({ nameError: '' });
-        }
-        break;
-      case 'addressLine':
-        // Make the error element visible
-        document.getElementById('address-error').style.visibility = 'visible';
-
-        // Field is required
-        if (!value) {
-          this.setState({ addressError: 'Address is required' });
-
-          // Input must be at least 6 characters long to be valid
-        } else if (value.length < 6) {
-          this.setState({ addressError: 'Please enter at least 6 characters for address' });
-
-          // If all conditions pass, remove any err messages if there are any
-        } else {
-          this.setState({ addressError: '' });
-        }
-        break;
-      case 'city':
-        document.getElementById('city-error').style.visibility = 'visible';
-
-        if (!value) {
-          this.setState({ cityError: 'City is required' });
-        } else if (value.length < 3) {
-          this.setState({ cityError: 'Please enter at least 3 characters for city' });
-        } else {
-          this.setState({ cityError: '' });
-        }
-        break;
-      case 'state':
-        document.getElementById('state-error').style.visibility = 'visible';
-
-        if (!value) {
-          this.setState({ stateError: 'State is required' });
-        } else if (!isNaN(value)) {
-          this.setState({ stateError: 'Please use 2 letter state code' });
-        } else {
-          this.setState({ stateError: '' });
-        }
-        break;
-      case 'zipcode':
-        document.getElementById('zipcode-error').style.visibility = 'visible';
-
-        if (!value) {
-          this.setState({ zipcodeError: 'Zip is required' });
-        } else if (isNaN(value)) {
-          this.setState({ zipcodeError: 'Please use 2 letter state code' });
-        } else {
-          this.setState({ zipcodeError: '' });
-        }
-        break;
-      case 'creditCard':
-        document.getElementById('credit-card-error').style.visibility = 'visible';
-
-        if (!value) {
-          this.setState({ creditCardError: 'Credit Card is required' });
-        } else if (value.length < 15) {
-          this.setState({ creditCardError: 'Invalid Credit Card Number' });
-        } else {
-          this.setState({ creditCardError: '' });
-        }
-        break;
-      case 'cvv':
-        document.getElementById('cvv-error').style.visibility = 'visible';
-
-        if (!value) {
-          this.setState({ cvvError: 'CVV is required' });
-        } else if (value.length < 3) {
-          this.setState({ cvvError: 'Invalid CVV' });
-        } else {
-          this.setState({ cvvError: '' });
-        }
-    }
   }
 
   showErrors(e) {
@@ -165,7 +62,14 @@ class CheckoutForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const { name, addressLine, city, state, zipcode, creditCard } = this.state;
+    let { name, addressLine, city, state, zipcode, creditCard } = this.state;
+
+    name = name.trim();
+    addressLine = addressLine.trim();
+    city = city.trim();
+    state = state.trim();
+    zipcode = zipcode.trim();
+    creditCard = creditCard.trim();
 
     const customer = {
       name,
@@ -194,6 +98,7 @@ class CheckoutForm extends React.Component {
   handleChange(e) {
     const { name } = e.target;
     let { value } = e.target;
+
     const noNumbers = /[0-9]/g;
     const noLetters = /[A-Za-z]/g;
 
@@ -207,7 +112,7 @@ class CheckoutForm extends React.Component {
           this.setState({ nameError: 'Name is required' });
 
         // Name must be at least 5 characters
-        } else if (value.length < 5) {
+        } else if (value.trim().length < 5) {
           this.setState({ nameError: 'Please enter at least 5 characters' });
 
           // If all conditions pass, remove any err messages if there are any
@@ -225,7 +130,7 @@ class CheckoutForm extends React.Component {
           this.setState({ addressError: 'Address is required' });
 
           // Input must be at least 6 characters long to be valid
-        } else if (value.length < 6) {
+        } else if (value.trim().length < 6) {
           this.setState({ addressError: 'Please enter at least 6 characters for address' });
 
           // If all conditions pass, remove any err messages if there are any
@@ -240,7 +145,7 @@ class CheckoutForm extends React.Component {
 
         if (!value) {
           this.setState({ cityError: 'City is required' });
-        } else if (value.length < 3) {
+        } else if (value.trim().length < 3) {
           this.setState({ cityError: 'Please enter at least 3 characters for city' });
         } else {
           this.setState({ cityError: '' });
@@ -280,7 +185,7 @@ class CheckoutForm extends React.Component {
 
         if (!value) {
           this.setState({ creditCardError: 'Credit Card is required' });
-        } else if (value.length < 15) {
+        } else if (value.trim().length < 15) {
           this.setState({ creditCardError: 'Invalid Credit Card Number' });
         } else {
           this.setState({ creditCardError: '' });
@@ -293,7 +198,7 @@ class CheckoutForm extends React.Component {
 
         if (!value) {
           this.setState({ cvvError: 'CVV is required' });
-        } else if (value.length < 2) {
+        } else if (value.trim().length < 2) {
           this.setState({ cvvError: 'Invalid CVV' });
         } else {
           this.setState({ cvvError: '' });
@@ -322,8 +227,8 @@ class CheckoutForm extends React.Component {
     return (
       <section className="container checkout-container">
         <div className="row">
-          <div className="col-12 p-3">
-            <div className="lead text-primary text-center text-sm-left link" onClick={ () => this.props.setView('cart', {}) }>
+          <div className="col-12 p-3 text-center text-sm-left">
+            <div className="d-inline lead font-weight-bold text-primary link" onClick={ () => this.props.setView('cart', {}) }>
               &lt; Back to Cart
             </div>
           </div>

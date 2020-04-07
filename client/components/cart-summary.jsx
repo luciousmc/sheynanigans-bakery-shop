@@ -10,8 +10,8 @@ function CartSummary({ cartItems, total, addToCart, showConfirmDeleteModal, remo
   return (
     <section className="container w-80 rounded cart-summary-container">
       <div className="row">
-        <div className="col">
-          <div onClick={ () => setView('catalog', {}) } className="lead text-primary text-center text-sm-left link">
+        <div className="col text-center text-sm-left">
+          <div onClick={ () => setView('catalog', {}) } className="d-inline lead font-weight-bold text-primary link">
             &lt; Back to Catalog
           </div>
         </div>

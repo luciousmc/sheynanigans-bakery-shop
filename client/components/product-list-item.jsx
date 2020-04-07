@@ -2,7 +2,7 @@ import React from 'react';
 
 function ProductListItem(props) {
   return (
-    <div className="col">
+    <div className="col-12 col-sm-6 col-md-4">
       <div className="card mt-3 mx-auto card-item" style={ { width: '20rem' } }>
         <img
           className="card-img-top card-image"

@@ -146,7 +146,7 @@ span.icon i {
   color: white;
   text-shadow: 1px 1px 1px black;
   cursor: pointer;
-  background-color: var(--purple-lt);
+  background-color: var(--purple);
 }
 
 /* Cart Summary View */
