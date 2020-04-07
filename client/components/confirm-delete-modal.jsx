@@ -16,7 +16,7 @@ function ConfirmDeleteModal({ hideConfirmDeleteModal, removeFromCart, product: {
       <div className="container confirm-delete-box p-3">
         <div className="row">
           <div className="col">
-            <h3 className="text-center text-warning">Are you sure?</h3>
+            <h3 className="text-center text-dark">Are you sure?</h3>
             <hr/>
           </div>
         </div>

@@ -9,7 +9,7 @@ export default function ItemAddedModal({ hideItemAddedModal, setView }) {
   return (
     <section
       onClick={ () => hideItemAddedModal()} className="modal-screen d-flex justify-content-center align-items-center" id="item-added-modal">
-      <div className="container item-added-box w-20 p-3">
+      <div className="container item-added-box p-3">
         <div className="row">
           <div className="col">
             <h3 className="text-center text-success">Item Added! <i className="fas fa-check"></i></h3>
