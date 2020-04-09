@@ -58,7 +58,7 @@ function CartSummaryItem({ cartItem, addToCart, setView, showConfirmDeleteModal,
           <div className="col">
             <div className="form-group text-right">
               <label htmlFor="qty">Qty:</label>
-              <input type="number" name="quantity" id="qty" value={ quantity } onChange={ onQtyChange } />
+              <input type="number" name="quantity" id="qty" defaultValue={ quantity } onBlur={ onQtyChange } />
             </div>
           </div>
         </div>
