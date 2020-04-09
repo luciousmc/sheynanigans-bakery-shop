@@ -115,6 +115,9 @@ span.icon i {
 }
 
 /* Catalog View */
+.card-item {
+  max-width: 285px;
+}
 
 .card img {
   height: 180px;
@@ -299,7 +302,7 @@ table {
   /* Catalog View */
 
   .card-item {
-    width: 16rem !important;
+    max-width: 250px;
   }
   .card-item h5, .card-item p {
     text-align: center;
