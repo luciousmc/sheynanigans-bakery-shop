@@ -235,7 +235,7 @@ class App extends Component {
     let renderView;
     const overflow = showModal || showConfirmDeleteModal || showItemAddedModal
       ? 'no-scroll'
-      : 'scroll';
+      : '';
 
     if (this.state.view.name === 'catalog') {
       renderView = <ProductList setView={ this.setView } />;
