@@ -238,14 +238,19 @@ class App extends Component {
       : '';
 
     if (this.state.view.name === 'catalog') {
-      renderView = <ProductList setView={ this.setView } />;
+      renderView = (
+        <ProductList
+          setView={ this.setView }
+        />
+      );
     } else if (this.state.view.name === 'details') {
       renderView = (
         <ProductDetails
           params={ this.state.view.params }
           setView={ this.setView }
           addToCart={ this.addToCart }
-        />);
+        />
+      );
     } else if (this.state.view.name === 'cart') {
       renderView = (
         <CartSummary
@@ -256,7 +261,8 @@ class App extends Component {
           removeSingleItem={ this.removeSingleItem }
           showConfirmDeleteModal={ this.showConfirmDeleteModal }
           total={ this.state.cartTotal }
-        />);
+        />
+      );
     } else if (this.state.view.name === 'checkout') {
       renderView = (
         <CheckoutForm
