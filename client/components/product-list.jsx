@@ -22,7 +22,7 @@ class ProductList extends React.Component {
   }
 
   render() {
-    if (this.state.products === []) {
+    if (this.state.products.length < 1) {
       return (
         <div className="loading-gif text-center mt-5">
           <img src="/images/bakery/loader/2.gif" alt="Loading GIF"/>
