@@ -5,10 +5,27 @@ function CartSummaryItem({ cartItem, addToCart, setView, showConfirmDeleteModal,
   const [quantity, setQuantity] = useState(params.multiplier);
 
   /**
+   * Prevents the user from typing in certain characters. Uses event.keyCode to check for button pressed
+   * - 189 = NumPad -
+   * - 109 = Key -
+   * - 107 = NumPad +
+   */
+  const disableKeyPress = e => {
+    if (e.keyCode === 189 || e.keyCode === 109 || e.keyCode === 107) {
+      e.preventDefault();
+      return false;
+    }
+  };
+
+  /**
    * Updates the quantity of the product in the cart based on the number set
    */
   const onQtyChange = e => {
     const { value } = e.target;
+
+    if (value === '') {
+      return;
+    }
 
     if (value > quantity) {
       const amt = value - quantity;
@@ -58,7 +75,7 @@ function CartSummaryItem({ cartItem, addToCart, setView, showConfirmDeleteModal,
           <div className="col">
             <div className="form-group text-right">
               <label htmlFor="qty">Qty:</label>
-              <input type="number" name="quantity" id="qty" defaultValue={ quantity } onBlur={ onQtyChange } />
+              <input type="number" min="0" name="quantity" id="qty" defaultValue={ quantity } onChange={ onQtyChange } onKeyDown={ disableKeyPress } />
             </div>
           </div>
         </div>
