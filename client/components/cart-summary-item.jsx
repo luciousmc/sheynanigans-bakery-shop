@@ -23,9 +23,7 @@ function CartSummaryItem({ cartItem, addToCart, setView, showConfirmDeleteModal,
   const onQtyChange = e => {
     const { value } = e.target;
 
-    if (value === '') {
-      return;
-    }
+    if (value === '') return;
 
     if (value > quantity) {
       const amt = value - quantity;
