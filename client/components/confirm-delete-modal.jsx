@@ -11,6 +11,12 @@ function ConfirmDeleteModal({ hideConfirmDeleteModal, removeFromCart, product: {
     hideConfirmDeleteModal();
   };
 
+  const handleCancelClick = () => {
+    const qty = document.getElementById('qty');
+    qty.value = productAmt;
+    hideConfirmDeleteModal();
+  };
+
   return (
     <section className="modal-screen d-flex justify-content-center align-items-center" id="confirm-delete-modal">
       <div className="container confirm-delete-box p-3">
@@ -34,7 +40,7 @@ function ConfirmDeleteModal({ hideConfirmDeleteModal, removeFromCart, product: {
         <div className="row mt-5">
           <div className="col text-right">
             <button onClick={ handleDeleteItemClick } className="btn btn-danger mr-3">Delete Item</button>
-            <button onClick={ () => hideConfirmDeleteModal() } className="btn btn-secondary">Cancel</button>
+            <button onClick={ handleCancelClick } className="btn btn-secondary">Cancel</button>
           </div>
         </div>
       </div>

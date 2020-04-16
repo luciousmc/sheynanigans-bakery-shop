@@ -24,6 +24,10 @@ function CartSummaryItem({ cartItem, addToCart, setView, showConfirmDeleteModal,
     const { value } = e.target;
 
     if (value === '') return;
+    if (parseInt(value) === 0) {
+      showConfirmDeleteModal(cartItem, quantity);
+      return;
+    }
 
     if (value > quantity) {
       const amt = value - quantity;
@@ -36,7 +40,7 @@ function CartSummaryItem({ cartItem, addToCart, setView, showConfirmDeleteModal,
     if (quantity > value) {
       const amt = quantity - value;
       for (let count = 0; count < amt; count++) {
-        removeSingleItem(cartItem.cartItemId);
+        removeSingleItem(params.ids.shift());
         setQuantity(quantity - amt);
       }
     }
