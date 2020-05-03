@@ -6,6 +6,8 @@
 
 Shenanigans Bakery™ is a full stack shopping cart app using React.js/Node.js
 
+The app is live at [https://sheynanigans.marlonclay.com](https://sheynanigans.marlonclay.com)
+
 ![GIF Image](doc/demo.gif)
 
 - Content management system(CMS) using PostgreSQL as the database
