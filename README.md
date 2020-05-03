@@ -11,7 +11,7 @@ The app is live at [https://sheynanigans.marlonclay.com](https://sheynanigans.ma
 ![GIF Image](doc/demo.gif)
 
 - Content management system(CMS) using PostgreSQL as the database
-- Front end coded with React with Bootstrap
+- Front end coded using React and Bootstrap
 - User can add and remove items form the cart
 - User can "Purchase" items (No processing is done).
 
